@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  distance: 1
+  minimum_age: 1
+  maximum_age: 1
+  body_type: MyString
+  relationship_status: MyString
+  has_children: MyString
+  want_children: MyString
+  smokes: MyString
+  drinks: MyString
+  ethnicity: MyString
+  religion: MyString
+  education: MyString
+  minimum_height: 1
+  maximum_height: 1
+  dealbreaker: MyString
+  most_important: MyString
+
+two:
+  user: two
+  distance: 1
+  minimum_age: 1
+  maximum_age: 1
+  body_type: MyString
+  relationship_status: MyString
+  has_children: MyString
+  want_children: MyString
+  smokes: MyString
+  drinks: MyString
+  ethnicity: MyString
+  religion: MyString
+  education: MyString
+  minimum_height: 1
+  maximum_height: 1
+  dealbreaker: MyString
+  most_important: MyString

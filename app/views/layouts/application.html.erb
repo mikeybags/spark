@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Spark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <% if flash[:errors] %>
+  <ul>
+    <% flash[:errors].each do |e| %>
+     <li><%= e %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <% if @user %>
+    <a href="/logout">Logout</a>
+  <% end %>
+  <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-app.factory("userFactory", ['$http', function($http){
+app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
   var factory = {}
   factory.createUser = function(user, callback){
     console.log(user)
@@ -26,6 +26,11 @@ app.factory("userFactory", ['$http', function($http){
   factory.updateBio = function(user, callback){
     $http.post('/users/bio', user).then(function(data){
       callback(data.data)
+    })
+  }
+  factory.updatePersonality = function(result, callback){
+    $http.post('/users/personality', {"personality": result, "user": $cookies.get("user")}).then(function(){
+      callback()
     })
   }
   return factory

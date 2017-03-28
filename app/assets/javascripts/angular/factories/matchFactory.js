@@ -1,5 +1,6 @@
-app.factory("matchFactory", ['$http', function($http){
-  var factory = {}
+app.factory("matchFactory", ['$http', function($http){=
+ var factory = {}
 
-  return factory
+ return factory
+
 }])

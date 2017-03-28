@@ -36,6 +36,8 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'angular_rails_csrf'
 gem 'hirb'
+gem 'paperclip'
+#http://rubythursday.com/episodes/ruby-snack-27-upgrade-paperclip-and-aws-sdk-in-prep-for-rails-5n walkthrough for S3 storage
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,0 +1,34 @@
+<div id="questionnaire">
+  <div ng-if="view < 6">
+    <h1 class="text-center">Personality Test</h1>
+    <hr>
+  </div>
+  <div ng-repeat="(key, val) in questions">
+    <div ng-if="view == key">
+      <div class="question-block" ng-repeat="(question_number, value) in val">
+        <h3 class="question text-center">{{value[0]}}</h3>
+        <div class="options">
+          <button type="button" class="btn btn-danger option" ng-click="updateAnswers(question_number, value[1], -3)">-3</button>
+          <button type="button" class="btn btn-danger option" ng-click="updateAnswers(question_number, value[1], -2)">-2</button>
+          <button type="button" class="btn btn-danger option" ng-click="updateAnswers(question_number, value[1], -1)">-1</button>
+          <button type="button" class="btn btn-info option" ng-click="updateAnswers(question_number, value[1], 0)">0</button>
+          <button type="button" class="btn btn-success option" ng-click="updateAnswers(question_number, value[1], 1)">1</button>
+          <button type="button" class="btn btn-success option" ng-click="updateAnswers(question_number, value[1], 2)">2</button>
+          <button type="button" class="btn btn-success option" ng-click="updateAnswers(question_number, value[1], 3)">3</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="view < 5">
+    <button class="btn btn-primary text-center" type="button" name="button" ng-click="nextView()">Next</button>
+  </div>
+  <div ng-if="view == 5">
+    <button class="btn btn-success text-center" type="button" name="button" ng-click="getResults()">Submit</button>
+  </div>
+  <div ng-if="view==6">
+    <h1 class="text-center">You are an {{result}}</h1>
+    <hr>
+    <h4>{{personality_descriptions[result]}}</h4>
+    <a class="btn btn-primary text-center" href="#!/">Proceed</a>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 app.controller('userController', ['$scope', 'userFactory', '$location', '$cookies','Upload', function($scope, userFactory, $location, $cookies, Upload){
 console.log($cookies.get('id'))
 if($cookies.get('id')){
-  $scope.view = 2
+  $scope.view = Number($cookies.get('view'))
 }else{
   $scope.view = 0
 }
@@ -30,7 +30,7 @@ $scope.createUser = function(){
     $scope.user.height = (Number($scope.user.feet) * 12) + Number($scope.user.inches)
     userFactory.updateTraits($scope.user, function(data){
       if(data.errors){
-        console.log(data.errors)
+        $scope.errors = data.errors
       }
       else{
         $cookies.put('id', data.user.id)
@@ -46,7 +46,7 @@ $scope.createUser = function(){
     $scope.user.number_children = Number($scope.user.number_children)
     userFactory.updateRelationship($scope.user, function(data){
       if(data.errors){
-        console.log(data.errors)
+        $scope.errors = data.errors
       }else {
         console.log('working')
         $scope.user = data.user
@@ -66,7 +66,7 @@ $scope.createUser = function(){
     }
     userFactory.updateMoreAttributes($scope.user, function(data){
       if(data.errors){
-        console.log(data.errors)
+        $scope.errors = data.errors
       }
       else{
         $scope.user = data.user
@@ -79,7 +79,7 @@ $scope.createUser = function(){
     $scope.user.id = Number($cookies.get('id'))
     userFactory.updateBio($scope.user, function(data){
       if(data.errors){
-        console.log(data.errors)
+        $scope.errors = data.errors
       }else {
         $scope.user = data.user
         $cookies.put('view', 5)
@@ -87,30 +87,35 @@ $scope.createUser = function(){
       }
     })
   }
-  $scope.uploadFiles = function(file, errFiles) {
-      $scope.f = file;
-      $scope.errFile = errFiles && errFiles[0];
-      if (file) {
-          file.upload = Upload.upload({
-              url: '/users/image/' + $cookies.get('id'),
-              method: 'POST',
-              data: {file: file}
-          }).then(function(response){
-            if(response.err){
-              console.log(err)
-            }
-            else{
-              $location.url('/');
-            }
-          });
-          };
-      }
+  $scope.upload = function (file) {
+    $scope.user.id = Number($cookies.get('id'))
+     Upload.upload({
+       url: 'users/image/' + $scope.user.id,
+       method: 'PUT',
+       headers: { 'Content-Type': false },
+       fields: {
+         'user[profile_picture]': file
+       },
+       file: file,
+       sendFieldsAs: 'json'
+     }).then(function (resp) {
+       console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
+       $scope.user = resp.data.user
+     }, function (resp) {
+       console.log('Error status: ' + resp.status);
+     }, function (evt) {
+       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+       console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+     });
+   };
   $scope.previousPage = function(){
     $scope.view -= 1
     $cookies.put('view', $scope.view)
+    $scope.errors = {}
   }
   $scope.nextPage = function(){
     $scope.view += 1
     $cookies.put('view', $scope.view)
+    $scope.errors = {}
   }
 }])

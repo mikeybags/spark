@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def traits
     puts "check"
-    user = User.update(params[:id], height: params[:height], body_type: params[:body_type], religion: params[:religion])
+    user = User.update(params[:id], height: params[:height], body_type: params[:body_type], religion: params[:religion], gender: params[:gender])
     if user.valid?
       render json: {user: user}
     else
@@ -57,11 +57,9 @@ class UsersController < ApplicationController
   end
 
   def image
-    puts params
-    username = User.find(params[:id])
-    file = params[:file]
-    @picture_path = "assets/"+username.username.to_s+file.original_filename.to_s
-    user = User.update(params[:id], profile_picture: @picture_path)
+    user = User.find(params[:id])
+    user.update(user_params)
+    render json: {user: user}
   end
 
   def updatePersonality
@@ -76,5 +74,9 @@ class UsersController < ApplicationController
     user.save
     preference.save
     render json: user
+  end
+  private
+  def user_params
+    params.require(:user).permit(:profile_picture)
   end
 end

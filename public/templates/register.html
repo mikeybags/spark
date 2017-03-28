@@ -1,6 +1,8 @@
 
 
 <div ng-if="view == 0">
+  <h1>User Registration</h1>
+  <h3>Page {{view}} of 6</h3>
   <form class="form" ng-submit="createUser()">
     <label for="username">Profile Name: </label>
     <input type="text" class="form-control" name="username" ng-model="user.username">
@@ -14,15 +16,20 @@
     <input type="password" class="form-control" name="password_confirmation" ng-model="user.password_confirmation">
     <input type="submit" class="btn btn-primary pull-right" value="Register">
   </form>
-  <ul ng-repeat="error in errors">
-    <li>{{ error }}</li>
-  </ul>
 </div>
 
 <div ng-if="view == 1">
-  <h1>Traits</h1>
+  <h1>User Registration</h1>
+  <h3>Page {{view + 1}} of 6</h3>
+  <hr>
   <form class="form" ng-submit="updateTraits()">
+    <div class="container">
     <div class="row">
+    <label for="gender">Gender</label>
+    <select name="user.gender">
+      <option value="Man">Man</option>
+      <option value="Women">Women</option>
+    </select>
     <label for="height">Height: </label>
     <select ng-model="user.feet">
       <option value="-">-</option>
@@ -50,6 +57,7 @@
     </select>
     <p class="height">Inches</p>
     </div>
+    <div class="row">
     <label name="body_type">Body Type: </label>
     <select class="form-control" ng-model="user.body_type">
       <option value="no answer">No Answer</option>
@@ -59,7 +67,7 @@
       <option value="a few extra pounds">A Few Extra Pounds</option>
       <option value="stocky">Stocky</option>
     </select>
-    <label for="faith">Faith: </label>
+    <label for="religion">Faith: </label>
     <select class="form-control" ng-model="user.religion">
       <option value="no answer">No Answer</option>
       <option value="atheist">Atheist</option>
@@ -68,12 +76,22 @@
       <option value="muslim">Muslim</option>
       <option value="other">Other</option>
     </select>
-    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    </div>
+    <div class="row">
+      <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    </div>
+    </div>
   </form>
-  <a ng-click="nextPage()">Next</a>
+  <hr>
+  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 <div ng-if="view == 2">
+  <h1>User Registration</h1>
+  <h3>Page {{view + 1}} of 6</h3>
+  <hr>
   <form ng-submit="updateRelationship()">
+    <div class="container">
+    <div class="row">
     <label for="relationship_status">Relationship Status: </label>
     <select ng-model="user.relationship_status">
       <option value="never married">Never Married</option>
@@ -86,6 +104,8 @@
       <option value="false">No</option>
       <option value="true">Yes</option>
     </select>
+    </div>
+    <div class="row">
     <label for="number_children">Number of kids: </label>
     <select ng-model="user.number_children">
       <option value="0">0</option>
@@ -104,84 +124,110 @@
       <option value="no">No</option>
       <option value="no, but it's ok if my partner has kids">No, but it's OK if my partner has kids</option>
     </select>
-    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    </div>
+      <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    </div>
   </form>
-  <a ng-click="previousPage()">Back</a>
-  <a ng-click="nextPage()">Next</a>
-  <img ng-src="assets/sam.jpeg" alt="not working">
+  <hr>
+  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
+  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 3">
+  <h1>User Registration</h1>
+  <h3>Page {{view + 1}} of 6</h3>
+  <hr>
   <form ng-submit="updateMoreAttributes()">
-    <label for="ethnicity">Ethnicity: </label>
-      <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
-      <input type="checkbox" ng-model="user.race.black" value="black / african descent"> Black / African Descent
-      <input type="checkbox" ng-model="user.race.latino" value="latino"> Latino
-      <input type="checkbox" ng-model="user.race.white" value="white / caucasian"> White / Caucasian
-      <input type="checkbox" ng-model="user.race.other" value="other"> Other
-    <label for="smoker">Smoke: </label>
-      <select ng-model="user.smoker">
-        <option value="no answer">No Answer</option>
-        <option value="no way">No Way</option>
-        <option value="occasionally">Occasionally</option>
-        <option value="daily">Daily</option>
-        <option value="cigar aficionado">Cigar aficionado</option>
-        <option value="yes, but trying to quit">Yes, but trying to quit</option>
-      </select>
-    <label for="drinker">Drink: </label>
-      <select ng-model="user.drinker">
-        <option value="no answer">No Answer</option>
-        <option value="never">Never</option>
-        <option value="social drinker">Social Drinker</option>
-        <option value="regularly">Regularly</option>
-        <option value="moderately">Moderately</option>
-      </select>
-    <label for="education_level">Highest Level of Education: </label>
-      <select ng-model="user.education_level">
-        <option value="no answer">No Answer</option>
-        <option value="high school">High school</option>
-        <option value="some college">Some college</option>
-        <option value="no answer">associates degree</option>
-        <option value="bachelors degree">bachelors degree</option>
-        <option value="graduate degree">graduate degree</option>
-        <option value="phd / post doctoral">phd / post doctoral</option>
-      </select>
-    <label for="salary">Salary: </label>
-    <select ng-model="user.salary">
-      <option value="no answer">No Answer</option>
-      <option value="less than 25,000">less than $25,000</option>
-      <option value="$25,001 to $35,000">$25,001 to $35,000</option>
-      <option value="$35,001 to $50,000">$35,001 to $50,000</option>
-      <option value="$50,001 to $75,000">$50,001 to $75,000</option>
-      <option value="$75,001 to $100,000">$75,001 to $100,000</option>
-      <option value="$100,001 to $150,000">$100,001 to $150,000</option>
-      <option value="$150,001+">$150,001+</option>
-    </select>
-    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    <div class="container">
+      <div class="row">
+        <label for="ethnicity">Ethnicity: </label>
+        <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
+        <input type="checkbox" ng-model="user.race.black" value="black"> Black / African Descent
+        <input type="checkbox" ng-model="user.race.latino" value="latino"> Latino
+        <input type="checkbox" ng-model="user.race.white" value="white"> White / Caucasian
+        <input type="checkbox" ng-model="user.race.other" value="other"> Other
+      </div>
+      <div class="row">
+        <label for="smoker">Smoke: </label>
+        <select ng-model="user.smoker">
+          <option value="no answer">No Answer</option>
+          <option value="no way">No Way</option>
+          <option value="occasionally">Occasionally</option>
+          <option value="daily">Daily</option>
+          <option value="cigar aficionado">Cigar aficionado</option>
+          <option value="yes, but trying to quit">Yes, but trying to quit</option>
+        </select>
+        <label for="drinker">Drink: </label>
+        <select ng-model="user.drinker">
+          <option value="no answer">No Answer</option>
+          <option value="never">Never</option>
+          <option value="social drinker">Social Drinker</option>
+          <option value="regularly">Regularly</option>
+          <option value="moderately">Moderately</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="education_level">Highest Level of Education: </label>
+        <select ng-model="user.education_level">
+          <option value="no answer">No Answer</option>
+          <option value="high school">High school</option>
+          <option value="some college">Some college</option>
+          <option value="no answer">associates degree</option>
+          <option value="bachelors degree">bachelors degree</option>
+          <option value="graduate degree">graduate degree</option>
+          <option value="phd / post doctoral">phd / post doctoral</option>
+        </select>
+        <label for="salary">Salary: </label>
+        <select ng-model="user.salary">
+          <option value="no answer">No Answer</option>
+          <option value="less than 25,000">less than $25,000</option>
+          <option value="$25,001 to $35,000">$25,001 to $35,000</option>
+          <option value="$35,001 to $50,000">$35,001 to $50,000</option>
+          <option value="$50,001 to $75,000">$50,001 to $75,000</option>
+          <option value="$75,001 to $100,000">$75,001 to $100,000</option>
+          <option value="$100,001 to $150,000">$100,001 to $150,000</option>
+          <option value="$150,001+">$150,001+</option>
+        </select>
+      </div>
+      <div class="row">
+        <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+      </div>
+    </div>
   </form>
-  <a ng-click="previousPage()">Back</a>
-  <a ng-click="nextPage()">Next</a>
+  <hr>
+  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
+  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 4">
+  <h1>User Registration</h1>
+  <h3>Page {{view + 1}} of 6</h3>
+  <hr>
   <form ng-submit="updateBio()">
-    <label for="zipcode">Zipcode: </label>
-    <input type="text" ng-model="user.zipcode">
-    <label for="bio">Bio: </label>
-    <textarea ng-model="user.bio" rows="8" cols="80"></textarea>
-    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    <div class="container">
+      <label for="zipcode">Zipcode: </label>
+      <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
+      <label for="bio">Bio: </label>
+      <textarea ng-model="user.bio" class="form-control" rows="8" cols="80"></textarea>
+      <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+    </div>
   </form>
-  <a ng-click="previousPage()">Back</a>
-  <a ng-click="nextPage()">Next</a>
+  <hr>
+  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
+  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 5">
-  <button class="btn pull-right" type="file" ngf-select="uploadFiles($file, $invalidFiles, 'cover')"
-  accept="image/*" ngf-max-height="1000" ngf-max-size="10MB">Upload Photo</button>
-
-  <a ng-click="previousPage()">Back</a>
-  <a ng-click="Finished()">Finished</a>
+  <h1>User Registration</h1>
+  <h3>Page {{view + 1}} of 6</h3>
+  <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
+  <img ng-src="{{user.profile_picture}}" charset="utf-8">
+  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
+  <a href="/" class="btn btn-success">Finished</a>
 </div>
+<ul ng-repeat="error in errors">
+  <li>{{ error }}</li>
+</ul>
 <style media="screen">
   .height{
     display: inline-block;

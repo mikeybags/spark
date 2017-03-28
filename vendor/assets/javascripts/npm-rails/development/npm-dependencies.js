@@ -39989,10 +39989,7 @@ $provide.value("$locale", {
 require('./angular');
 module.exports = angular;
 
-<<<<<<< HEAD
 },{"./angular":8}],10:[function(require,module,exports){
-=======
-},{"./angular":7}],9:[function(require,module,exports){
 /**!
  * AngularJS file upload directives and services. Supports: file upload/drop/paste, resume, cancel/abort,
  * progress, resize, thumbnail, preview, validation and CORS
@@ -42892,21 +42889,15 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
 }]);
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 require('./dist/ng-file-upload-all');
 module.exports = 'ngFileUpload';
-},{"./dist/ng-file-upload-all":9}],11:[function(require,module,exports){
->>>>>>> 31e74ea1fa59dab494b1265b40d88682afa10c03
+},{"./dist/ng-file-upload-all":10}],12:[function(require,module,exports){
 window.Angular = require('angular')
 window.AngularResource = require('angular-resource')
 window.AngularRoute = require('angular-route')
 window.AngularCookies = require('angular-cookies')
-<<<<<<< HEAD
 window.AngularBootstrap = require('angular-bootstrap')
-
-},{"angular":9,"angular-bootstrap":1,"angular-cookies":3,"angular-resource":5,"angular-route":7}]},{},[10]);
-=======
 window.NgFileUpload = require('ng-file-upload')
 
-},{"angular":8,"angular-cookies":2,"angular-resource":4,"angular-route":6,"ng-file-upload":10}]},{},[11]);
->>>>>>> 31e74ea1fa59dab494b1265b40d88682afa10c03
+},{"angular":9,"angular-bootstrap":1,"angular-cookies":3,"angular-resource":5,"angular-route":7,"ng-file-upload":11}]},{},[12]);

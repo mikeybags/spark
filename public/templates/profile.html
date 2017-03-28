@@ -1,14 +1,14 @@
 <div>
-  <div class="col-md-3">
-    To be continued
+  <div id="profile-sidebar" class="col-md-3">
+    <img ng-src="{{user.profile_picture}}" alt="Profile Picture">
+    <button type="button" name="button"></button>
   </div>
-  <div class="col-md-9">
-    <div id="profile-links" class="col-sm-12 row">
-      <uib-tabset id="home-tabs" active="activePill" vertical="false" type="pills">
-        <uib-tab index="0" heading="About" data-ng-click="changeView(1, containerView)"></uib-tab>
-        <uib-tab index="1" heading="Photos" data-ng-click="changeView(2, containerView)"></uib-tab>
-        <uib-tab index="2" heading="Our History" data-ng-click="changeView(3, containerView)"></uib-tab>
-      </uib-tabset>
-    </div>
+  <div id="profile-content" class="col-md-9">
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#">About</a></li>
+      <li><a href="#">Photos</a></li>
+      <li><a href="#">Our History</a></li>
+    </ul>
   </div>
 </div>

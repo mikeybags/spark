@@ -1,25 +1,24 @@
 app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", function($scope, userFactory, $location, $cookies){
-  if ($cookies.get("user")){
-    $scope.currentUser = $cookies.get("user");
-    $scope.currentUser_id = $cookies.get('id');
+  if($cookies.get('id')){
+    $scope.current_user = true
+    $scope.current_user_id = $cookies.get('id')
   }
 
   $scope.logout = function(){
     $scope.currentUser = {};
-    $cookies.remove("user");
     $cookies.remove("id");
     $location.url('/home');
   }
 
-  // userFactory.showUser($scope.currentUser_id, function(data){
-  //   if(data.err){
-  //     console.log(data.err)
-  //   }
-  //   else{
-  //     $scope.currentUser = data.user
-  //   }
-  // })
-  // 
+  userFactory.getUser($scope.current_user_id, function(data){
+    if(data.err){
+      console.log(data.err)
+    }
+    else{
+      $scope.current_user = data
+    }
+  })
+
   // $scope.login = function(){
   // $scope.modalInstance = $uibModal.open({
   //       animation: true,

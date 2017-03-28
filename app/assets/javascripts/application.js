@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require npm-dependencies
 //= require main
-//= require bootstrap-sprockets
 //= require angular-ui-bootstrap
+//= require bootstrap-sprockets
 //= require_tree .

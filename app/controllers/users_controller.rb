@@ -2,6 +2,13 @@ require 'fileutils'
 
 class UsersController < ApplicationController
   def show
+    user = User.find(params[:id])
+    if user
+      render json: user
+    else
+      render json: {errors: user.errors.full_messages}
+    end
+
   end
 
   def new
@@ -76,5 +83,14 @@ class UsersController < ApplicationController
     user.save
     preference.save
     render json: user
+  end
+
+  def getCurrent
+    user = User.find(params[:id])
+    if user
+      render json: user
+    else
+      render json: {errors: user.errors.full_messages}
+    end
   end
 end

@@ -92,7 +92,8 @@ body {
   border: none;
   border-radius: 0;
   margin-right: 0;
-  box-shadow: 0px 3px 5px #111111
+  box-shadow: 0px 3px 5px #111111;
+  height: 40px;
 
 }
 
@@ -272,7 +273,12 @@ background-color: #427AA1;
 }
 
 .wink {
-  background-image: url("../images/wink.png");
-  width: 25px;
+  width: 15px;
+  height: 15px;
+}
+
+
+.sm-user-img {
   height: 25px;
+  width: 20px;
 }

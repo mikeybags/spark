@@ -21,7 +21,7 @@ app.config(function ($routeProvider) {
     templateUrl: "../templates/welcome.html",
     controller: "userController"
   })
-  .when('/profile', {
+  .when('/users/:id', {
     templateUrl: "../templates/profile.html",
     controller: "userController"
   })

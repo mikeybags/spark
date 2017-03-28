@@ -1,5 +1,18 @@
 app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
   var factory = {}
+
+  factory.getUser = function(user_id, callback){
+    $http.get('/sessions/'+user_id).then(function(data){
+      callback(data.data)
+    })
+  }
+
+  factory.showUser = function(user_id, callback) {
+    $http.get('users/'+user_id).then(function(data){
+      callback(data.data)
+    })
+  }
+
   factory.createUser = function(user, callback){
     console.log(user)
     $http.post('/users/new', user).then(function(data){

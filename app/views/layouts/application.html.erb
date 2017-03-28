@@ -10,13 +10,6 @@
 
   <body>
     <div class="container">
-      <% if flash[:errors] %>
-  <ul>
-    <% flash[:errors].each do |e| %>
-     <li><%= e %></li>
-    <% end %>
-  </ul>
-  <% end %>
   <% if @user %>
     <a href="/logout">Logout</a>
   <% end %>

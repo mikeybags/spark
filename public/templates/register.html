@@ -1,0 +1,189 @@
+
+
+<div ng-if="view == 0">
+  <form class="form" ng-submit="createUser()">
+    <label for="username">Profile Name: </label>
+    <input type="text" class="form-control" name="username" ng-model="user.username">
+    <label for="email">Email: </label>
+    <input type="text" class="form-control" name="email" ng-model="user.email">
+    <label for="birthday">Birthday: </label>
+    <input type="date" class='form-control' name="birthday" ng-model="user.birthday">
+    <label for="password">Password: </label>
+    <input type="password" class="form-control" name="password" ng-model="user.password">
+    <label for="password_confirmation">Confirm Password: </label>
+    <input type="password" class="form-control" name="password_confirmation" ng-model="user.password_confirmation">
+    <input type="submit" class="btn btn-primary pull-right" value="Register">
+  </form>
+  <ul ng-repeat="error in errors">
+    <li>{{ error }}</li>
+  </ul>
+</div>
+
+<div ng-if="view == 1">
+  <h1>Traits</h1>
+  <form class="form" ng-submit="updateTraits()">
+    <div class="row">
+    <label for="height">Height: </label>
+    <select ng-model="user.feet">
+      <option value="-">-</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+    <p class="height">Feet</p>
+    <select ng-model="user.inches">
+      <option value="-">-</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+    <p class="height">Inches</p>
+    </div>
+    <label name="body_type">Body Type: </label>
+    <select class="form-control" ng-model="user.body_type">
+      <option value="no answer">No Answer</option>
+      <option value="slender">Slender</option>
+      <option value="athletic and toned">Athletic and Toned</option>
+      <option value="heavyset">Heavyset</option>
+      <option value="a few extra pounds">A Few Extra Pounds</option>
+      <option value="stocky">Stocky</option>
+    </select>
+    <label for="faith">Faith: </label>
+    <select class="form-control" ng-model="user.religion">
+      <option value="no answer">No Answer</option>
+      <option value="atheist">Atheist</option>
+      <option value="christian">Christian</option>
+      <option value="jewish">Jewish</option>
+      <option value="muslim">Muslim</option>
+      <option value="other">Other</option>
+    </select>
+    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+  </form>
+  <a ng-click="nextPage()">Next</a>
+</div>
+<div ng-if="view == 2">
+  <form ng-submit="updateRelationship()">
+    <label for="relationship_status">Relationship Status: </label>
+    <select ng-model="user.relationship_status">
+      <option value="never married">Never Married</option>
+      <option value="currently seperated">Currently Seperated</option>
+      <option value="divorced">Divorced</option>
+      <option value="widow | widower">Widow | Widower</option>
+    </select>
+    <label for="have_children">Have kids: </label>
+    <select ng-model="user.have_children">
+      <option value="false">No</option>
+      <option value="true">Yes</option>
+    </select>
+    <label for="number_children">Number of kids: </label>
+    <select ng-model="user.number_children">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <label for="want_children">Want kids: </label>
+    <select ng-model="user.want_children">
+      <option value="no answer">No Answer</option>
+      <option value="definetly">Definetly</option>
+      <option value="someday">Someday</option>
+      <option value="not sure">Not Sure</option>
+      <option value="probrably not">Probrably not</option>
+      <option value="no">No</option>
+      <option value="no, but it's ok if my partner has kids">No, but it's OK if my partner has kids</option>
+    </select>
+    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+  </form>
+  <a ng-click="previousPage()">Back</a>
+  <a ng-click="nextPage()">Next</a>
+  <img ng-src="assets/sam.jpeg" alt="not working">
+</div>
+
+<div ng-if="view == 3">
+  <form ng-submit="updateMoreAttributes()">
+    <label for="ethnicity">Ethnicity: </label>
+      <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
+      <input type="checkbox" ng-model="user.race.black" value="black / african descent"> Black / African Descent
+      <input type="checkbox" ng-model="user.race.latino" value="latino"> Latino
+      <input type="checkbox" ng-model="user.race.white" value="white / caucasian"> White / Caucasian
+      <input type="checkbox" ng-model="user.race.other" value="other"> Other
+    <label for="smoker">Smoke: </label>
+      <select ng-model="user.smoker">
+        <option value="no answer">No Answer</option>
+        <option value="no way">No Way</option>
+        <option value="occasionally">Occasionally</option>
+        <option value="daily">Daily</option>
+        <option value="cigar aficionado">Cigar aficionado</option>
+        <option value="yes, but trying to quit">Yes, but trying to quit</option>
+      </select>
+    <label for="drinker">Drink: </label>
+      <select ng-model="user.drinker">
+        <option value="no answer">No Answer</option>
+        <option value="never">Never</option>
+        <option value="social drinker">Social Drinker</option>
+        <option value="regularly">Regularly</option>
+        <option value="moderately">Moderately</option>
+      </select>
+    <label for="education_level">Highest Level of Education: </label>
+      <select ng-model="user.education_level">
+        <option value="no answer">No Answer</option>
+        <option value="high school">High school</option>
+        <option value="some college">Some college</option>
+        <option value="no answer">associates degree</option>
+        <option value="bachelors degree">bachelors degree</option>
+        <option value="graduate degree">graduate degree</option>
+        <option value="phd / post doctoral">phd / post doctoral</option>
+      </select>
+    <label for="salary">Salary: </label>
+    <select ng-model="user.salary">
+      <option value="no answer">No Answer</option>
+      <option value="less than 25,000">less than $25,000</option>
+      <option value="$25,001 to $35,000">$25,001 to $35,000</option>
+      <option value="$35,001 to $50,000">$35,001 to $50,000</option>
+      <option value="$50,001 to $75,000">$50,001 to $75,000</option>
+      <option value="$75,001 to $100,000">$75,001 to $100,000</option>
+      <option value="$100,001 to $150,000">$100,001 to $150,000</option>
+      <option value="$150,001+">$150,001+</option>
+    </select>
+    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+  </form>
+  <a ng-click="previousPage()">Back</a>
+  <a ng-click="nextPage()">Next</a>
+</div>
+
+<div ng-if="view == 4">
+  <form ng-submit="updateBio()">
+    <label for="zipcode">Zipcode: </label>
+    <input type="text" ng-model="user.zipcode">
+    <label for="bio">Bio: </label>
+    <textarea ng-model="user.bio" rows="8" cols="80"></textarea>
+    <input type="submit" class="btn btn-primary pull-right" value="Add Features">
+  </form>
+  <a ng-click="previousPage()">Back</a>
+  <a ng-click="nextPage()">Next</a>
+</div>
+
+<div ng-if="view == 5">
+  <button class="btn pull-right" type="file" ngf-select="uploadFiles($file, $invalidFiles, 'cover')"
+  accept="image/*" ngf-max-height="1000" ngf-max-size="10MB">Upload Photo</button>
+
+  <a ng-click="previousPage()">Back</a>
+  <a ng-click="Finished()">Finished</a>
+</div>
+<style media="screen">
+  .height{
+    display: inline-block;
+  }
+</style>

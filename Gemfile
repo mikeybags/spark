@@ -35,7 +35,7 @@ gem 'npm-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'angular_rails_csrf'
-
+gem 'hirb'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -15,4 +15,5 @@
 //= require npm-dependencies
 //= require main
 //= require bootstrap-sprockets
+//= require angular-ui-bootstrap
 //= require_tree .

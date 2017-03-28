@@ -1,3 +1,278 @@
 // Place all the styles related to the Matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  font-family: helvetica;
+}
+
+body {
+  background: linear-gradient(left, #F2F2F2, #FFFFFF, #F2F2F2);
+  background: -webkit-linear-gradient(left, #F2F2F2, #FFFFFF, #F2F2F2);
+  background: -o-linear-gradient(left, #F2F2F2, #FFFFFF, #F2F2F2);
+  background: -moz-linear-gradient(left, #F2F2F2, #FFFFFF, #F2F2F2);
+  padding-top: 50px;
+}
+
+#nav-container {
+  background-color:#427AA1;
+  height: 50px;
+  min-width: 1041px;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0px 10%;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 0 60px 0;
+  background-color: #FFFFFF;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nav-span {
+  color: #C5C5C5;
+  line-height: 20px;
+  position: relative;
+  padding: 15px 5px;
+  display: block;
+}
+
+.nav>li>a {
+  padding: 15px 5px;
+}
+
+.navbar-custom {
+    background-color:#427AA1;
+    color:#C5C5C5;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#FFFFFF;
+    text-shadow: none;
+}
+
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover{
+  color: #ffffff;
+  background-color: #6DAEDB
+}
+
+.navbar-custom .navbar-nav > li > a:hover {
+  color: #ffffff;
+  background-color: #427AA1
+}
+
+.navbar-nav > .dropdown > :focus {
+  color: #6DAEDB;
+  background-color: #FFFFFF
+}
+
+
+
+.navbar-custom .navbar-nav > .active > a {
+  background-color: #427AA1
+}
+
+.navbar-custom .navbar-brand {
+    color:#FFFFFF;
+    background-color: #427AA1;
+    text-shadow: none;
+}
+
+#main-nav {
+  background-color: #427AA1;
+  color: #000000;
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  margin-right: 0;
+  box-shadow: 0px 3px 5px #111111
+
+}
+
+.navbar .navbar-fluid {
+background-color: #427AA1;
+}
+
+.navbar-center {
+  float: none;
+}
+
+.nav-collapse{
+    margin-right: 50%;
+}
+
+.nav .open >a, .nav .open >a:focus, .nav .open >a:hover{
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.navbar-nav .open .dropdown-menu {
+  background-color: #FFFFFF;
+}
+
+.navbar-nav > li > a:focus {
+  background-color: #FFFFFF;
+}
+
+.navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-nav .open .dropdown-menu > li > a:focus {
+  color: #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+.navbar-nav .open .dropdown-menu > li > a {
+  color: #064789;
+  background-color: #FFFFFF;
+  z-index: 20;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+  background-color: #FFF;
+}
+
+.navbar-toggle {
+  border: 1px solid #FFF;
+  border-radius: 5px;
+}
+
+.navbar .nav > li.dropdown.open > a,
+.navbar .nav > li.dropdown.open > ul.dropdown-menu > li > a:hover {
+   color: #6DAEDB;
+   background-color: #FFFFFF;
+   border-color: #6DAEDB;
+}
+
+.navbar .nav > li.dropdown.open > ul.dropdown-menu {
+  border-right: 0px;
+  margin-right: -6px;
+}
+
+#navbar > ul > li > .user-dropdown {
+  padding: 13px 25px 16px 25px;
+}
+
+#navbar > ul > li > .user-dropdown > .dropdown-menu {
+  margin-left: 10px;
+}
+
+.navbar .nav > li.dropdown.open > ul.dropdown-menu > .divider {
+  background-color: #427AA1
+}
+
+.navbar-left > li {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  width: 100px;
+  text-align: center;
+}
+
+#sign_in {
+  background-color: #6DAEDB;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+
+#sign_in:hover, #create_account:hover {
+  border-color: #D2D2D2
+}
+
+#create_account {
+  background-color: #6DAEDB;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+}
+
+#nav-login-button, #nav-register-button {
+  padding: 12px 5px 10px 5px;
+}
+
+.dropdown-toggle {
+  color: #FFFFFF
+}
+.navbar .nav .navbar-right> li.dropdown.open.active > ul > li > a:hover,
+.navbar .nav .navbar-right> li.dropdown.open > ul > li > a,
+.navbar .nav .navbar-right> li.dropdown > ul.dropdown-menu > li > ul > li >  a:hover
+{
+   color: #fff;
+   background-color: #FFFFFF;
+   border-color: #fff;
+   padding-left: 0px;
+}
+
+.panel-body:hover {
+  background-color: #e9f1f7;
+}
+
+.panel-body {
+  height: 40px;
+  padding: 10px 15px;
+}
+
+.panel-default > .panel-heading {
+  background-color: #e9f1f7;
+  color: #007cc4;
+}
+
+.nav .navbar-nav .navbar-left > .active > a { color: #FFF }
+
+@media (min-width: 768px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+    pointer-events: auto
+  }
+  .navbar-nav > .dropdown > .dropdown-toggle:hover {
+    pointer-events: none;
+  }
+}
+
+
+@media (max-width: 1040px) {
+  #nav-container {
+    width: 100%;
+    padding: 0px 10px;
+  }
+
+  .player-container {
+    width: 100%;
+    padding: 0px 10px;
+  }
+
+  .container-fluid {
+    padding: 0px 4px;
+  }
+
+  .container {
+    width: 100%
+  }
+
+  #fixed-top {
+    width: 100%
+  }
+  .navbar-collapse.collapse.in {
+     display: block;
+  }
+  .collapsing {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 840px) {
+  #navbar > ul > li > .user-dropdown {
+    padding: 13px 15px 16px 15px;
+  }
+}
+
+.wink {
+  background-image: url("../images/wink.png");
+  width: 25px;
+  height: 25px;
+}

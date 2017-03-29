@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngFileUpload"]);
+var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngFileUpload", "ui.bootstrap"]);
 app.config(function ($routeProvider) {
   $routeProvider
   .when('/', {
@@ -14,7 +14,24 @@ app.config(function ($routeProvider) {
     controller: "resultsController"
   })
   .when('/register', {
-    templateUrl: "../templates/register.html", controller: "userController"
+    templateUrl: "../templates/register.html",
+    controller: "userController"
+  })
+  .when('/home', {
+    templateUrl: "../templates/welcome.html",
+    controller: "userController"
+  })
+  .when('/users/:id', {
+    templateUrl: "../templates/profile.html",
+    controller: "userController"
+  })
+  .when('/login', {
+    templateUrl: "../templates/login.html",
+    controller: "navController"
+  })
+  .when('/messages', {
+    templateUrl: "../templates/messages.html"
+    controller: "messageController"
   })
   .otherwise({
     redirectTo: '/'

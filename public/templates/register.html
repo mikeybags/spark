@@ -23,7 +23,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form class="form" ng-submit="updateTraits()">
-    <div class="container">
     <div class="row">
     <label for="gender">Gender</label>
     <select name="user.gender">
@@ -80,17 +79,14 @@
     <div class="row">
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
     </div>
-    </div>
   </form>
   <hr>
-  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 <div ng-if="view == 2">
   <h1>User Registration</h1>
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateRelationship()">
-    <div class="container">
     <div class="row">
     <label for="relationship_status">Relationship Status: </label>
     <select ng-model="user.relationship_status">
@@ -126,11 +122,8 @@
     </select>
     </div>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
-    </div>
   </form>
   <hr>
-  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
-  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 3">
@@ -138,7 +131,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateMoreAttributes()">
-    <div class="container">
       <div class="row">
         <label for="ethnicity">Ethnicity: </label>
         <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
@@ -192,11 +184,8 @@
       <div class="row">
         <input type="submit" class="btn btn-primary pull-right" value="Add Features">
       </div>
-    </div>
   </form>
   <hr>
-  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
-  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 4">
@@ -204,17 +193,13 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateBio()">
-    <div class="container">
       <label for="zipcode">Zipcode: </label>
       <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
       <label for="bio">Bio: </label>
       <textarea ng-model="user.bio" class="form-control" rows="8" cols="80"></textarea>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
-    </div>
   </form>
   <hr>
-  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
-  <a ng-click="nextPage()" class="btn btn-success" >Next</a>
 </div>
 
 <div ng-if="view == 5">
@@ -222,7 +207,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
   <img ng-src="{{user.profile_picture}}" charset="utf-8">
-  <a ng-click="previousPage()" class="btn btn-danger">Back</a>
   <a href="/" class="btn btn-success">Finished</a>
 </div>
 <ul ng-repeat="error in errors">

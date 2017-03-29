@@ -9,7 +9,6 @@ class User < ApplicationRecord
    validates :username, uniqueness: true
    validates :username, :birthday, presence: true
    validates :password, confirmation: true, length: {minimum: 7}, on: :create
-   validates :zipcode, length: {is: 5}
    has_many :user_interests
    has_many :interests, class_name: "Interest", through: 'user_interests'
    has_many :pictures

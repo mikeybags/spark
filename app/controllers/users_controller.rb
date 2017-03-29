@@ -2,6 +2,13 @@ require 'fileutils'
 
 class UsersController < ApplicationController
   def show
+    user = User.find(params[:id])
+    if user
+      render json: user
+    else
+      render json: {errors: user.errors.full_messages}
+    end
+
   end
 
   def new
@@ -32,8 +39,10 @@ class UsersController < ApplicationController
     end
     user = User.update(params[:id], relationship_status: params[:relationship_status], have_children: @have_children, want_children: params[:want_children], number_children: params[:number_children])
     if user.valid?
+      puts 'working'
       render json: {user: user}
     else
+      puts 'not working'
       render json: {errors: user.errors.full_messages}
     end
   end
@@ -48,7 +57,8 @@ class UsersController < ApplicationController
   end
 
   def bio
-    user = User.update(params[:id], zipcode: params[:zipcode], bio: params[:bio])
+    location = ZipCodes.identify(params[:zipcode].to_s)
+    user = User.update(params[:id], zipcode: params[:zipcode], bio: params[:bio], city: location[:city], state: location[:state_name])
     if user.valid?
       render json: {user: user}
     else
@@ -74,6 +84,25 @@ class UsersController < ApplicationController
     user.save
     preference.save
     render json: user
+  end
+
+  def login
+    puts 'working'
+    user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
+    if user
+      render json: {user: user}
+    else
+      render json: {errors: 'user does not exist'}
+    end
+  end
+
+  def getCurrent
+    user = User.find(params[:id])
+    if user
+      render json: user
+    else
+      render json: {errors: user.errors.full_messages}
+    end
   end
   private
   def user_params

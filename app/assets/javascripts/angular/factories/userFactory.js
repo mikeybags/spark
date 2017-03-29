@@ -1,5 +1,19 @@
 app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
   var factory = {}
+
+  factory.getUser = function(user_id, callback){
+    console.log('check')
+    $http.get('/sessions/'+user_id).then(function(data){
+      callback(data.data)
+    })
+  }
+
+  factory.showUser = function(user_id, callback) {
+    $http.get('users/'+user_id).then(function(data){
+      callback(data.data)
+    })
+  }
+
   factory.createUser = function(user, callback){
     console.log(user)
     $http.post('/users/new', user).then(function(data){
@@ -31,6 +45,12 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
   factory.updatePersonality = function(result, callback){
     $http.post('/users/personality', {"personality": result, "user": $cookies.get("user")}).then(function(){
       callback()
+    })
+  }
+  factory.login = function(user, callback){
+    console.log(user)
+    $http.post('/users/login', user).then(function(data){
+      callback(data.data)
     })
   }
   return factory

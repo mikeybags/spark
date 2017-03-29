@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def new
     user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday])
     if user.valid?
+      Preference.create(user:user)
       render json: {user: user}
     else
       render json: {errors: user.errors.full_messages}
@@ -70,6 +71,109 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     user.update(user_params)
     render json: {user: user}
+  end
+
+  def discover
+    current_user = User.includes(:preference).find(params[:id])
+    pref = current_user.preference
+    maximum_date = Time.now - (31536000 * pref.minimum_age)
+    minimum_date = Time.now - (31536000 * pref.maximum_age)
+    users = User.includes(:preference).where("gender = ?", pref.gender).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day)
+    if current_user.want_children = "yes"
+      users = users.where(:want_children => ["yes", "maybe"])
+    elsif current_user.want_children = "no"
+      users = users.where(:want_children => ["no", "maybe"])
+    end
+    if pref.has_children = "no"
+      users = users.where(have_children:false)
+    end
+    users.each do |person|
+      matched_on = []
+      person.compatability = 0
+      if person.preference.gender != current_user.gender
+        person.compatability -= 1000
+      end
+      if pref.body_type == nil
+        person.compatability += 3
+        matched_on << "body_type"
+      elsif pref.body_type.split(",").include?(person.body_type)
+        person.compatability += 5
+        matched_on << "body_type"
+      end
+      if pref.relationship_status == nil
+        person.compatability += 3
+        matched_on << "relationship_status"
+      elsif pref.relationship_status.split(",").include?(person.relationship_status)
+        person.compatability += 5
+        matched_on << "relationship_status"
+      end
+      if pref.smokes == nil
+        person.compatability += 3
+        matched_on << "smokes"
+      elsif pref.smokes.split(",").include?(person.smoker)
+        person.compatability += 5
+        matched_on << "smokes"
+      end
+      if pref.drinks == nil
+        person.compatability += 3
+        matched_on << "drinks"
+      elsif pref.drinks.split(",").include?(person.drinker)
+        person.compatability += 5
+        matched_on << "drinks"
+      end
+      if pref.religion == nil
+        person.compatability += 3
+        matched_on << "religion"
+      elsif pref.religion.split(",").include?(person.religion)
+        person.compatability += 5
+        matched_on << "religion"
+      end
+      if pref.education == nil
+        person.compatability += 3
+        matched_on << "education"
+      elsif pref.education.split(",").include?(person.education_level)
+        person.compatability += 5
+        matched_on << "education"
+      end
+      if pref.salary == nil
+        person.compatability += 3
+        matched_on << "salary"
+      elsif pref.salary.split(",").include?(person.salary)
+        person.compatability += 5
+        matched_on << "salary"
+      end
+      if pref.ethnicity == nil
+        person.compatability += 3
+        matched_on << "ethnicity"
+      else
+        ethnicities = pref.ethnicity.split(",") & person.ethnicity.split(",")
+        if ethnicities.length > 0 || pref.ethnicity == nil
+          person.compatability += 5
+          matched_on << "ethnicity"
+        end
+      end
+      if pref.minimum_height == nil && (pref.maximum_height == nil || person.height < pref.maximum_height)
+        person.compatability += 5
+        matched_on << "height"
+      elsif pref.maximum_height == nil && person.height > pref.minimum_height
+        person.compatability += 5
+        matched_on << "height"
+      elsif person.height.between?(pref.minimum_height,pref.maximum_height)
+        person.compatability += 5
+        matched_on << "height"
+      end
+      if pref.personalities.split(",").include?(person.personality)
+        person.compatability += 45
+      end
+      if matched_on.include?(pref.most_important)
+        person.compatability += 5
+      end
+      unless matched_on.include?(pref.dealbreaker)
+        person.compatability -= 30
+      end
+      puts person.compatability
+    end
+    render json: users
   end
 
   def updatePersonality

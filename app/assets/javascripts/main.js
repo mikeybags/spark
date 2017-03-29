@@ -33,6 +33,10 @@ app.config(function ($routeProvider) {
     templateUrl: "../templates/messages.html"
     controller: "messageController"
   })
+  .when('/discover', {
+    templateUrl: "../templates/discover.html",
+    controller: "discoverController"
+  })
   .otherwise({
     redirectTo: '/'
   })

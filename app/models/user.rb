@@ -12,7 +12,7 @@ class User < ApplicationRecord
    has_many :user_interests
    has_many :interests, class_name: "Interest", through: 'user_interests'
    has_many :pictures
-   has_one :preference
+   has_one :preference, dependent: :destroy
    has_many :matches
    has_many :messages
    has_many :favorites

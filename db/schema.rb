@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328144926) do
+ActiveRecord::Schema.define(version: 20170329002036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20170328144926) do
     t.string   "body_type"
     t.string   "relationship_status"
     t.string   "has_children"
-    t.string   "want_children"
     t.string   "smokes"
     t.string   "drinks"
     t.string   "ethnicity"
@@ -82,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170328144926) do
     t.datetime "updated_at",          null: false
     t.string   "personalities"
     t.string   "gender"
+    t.string   "salary"
     t.index ["user_id"], name: "index_preferences_on_user_id", using: :btree
   end
 
@@ -114,11 +114,18 @@ ActiveRecord::Schema.define(version: 20170328144926) do
     t.text     "bio"
     t.string   "profile_picture"
     t.integer  "zipcode"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"
+    t.integer  "compatability"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
+    t.string   "city"
+    t.string   "state"
   end
 
   add_foreign_key "favorites", "matches"

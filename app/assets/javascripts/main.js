@@ -25,6 +25,18 @@ app.config(function ($routeProvider) {
     templateUrl: "../templates/profile.html",
     controller: "profileController"
   })
+  .when('/login', {
+    templateUrl: "../templates/login.html",
+    controller: "navController"
+  })
+  .when('/messages', {
+    templateUrl: "../templates/messages.html"
+    controller: "messageController"
+  })
+  .when('/discover', {
+    templateUrl: "../templates/discover.html",
+    controller: "discoverController"
+  })
   .otherwise({
     redirectTo: '/'
   })

@@ -23,7 +23,7 @@ app.config(function ($routeProvider) {
   })
   .when('/users/:id', {
     templateUrl: "../templates/profile.html",
-    controller: "userController"
+    controller: "profileController"
   })
   .when('/login', {
     templateUrl: "../templates/login.html",

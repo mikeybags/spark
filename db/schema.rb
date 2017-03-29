@@ -119,13 +119,13 @@ ActiveRecord::Schema.define(version: 20170329002036) do
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"
-    t.integer  "compatability"
     t.string   "profile_picture_file_name"
     t.string   "profile_picture_content_type"
     t.integer  "profile_picture_file_size"
     t.datetime "profile_picture_updated_at"
     t.string   "city"
     t.string   "state"
+    t.integer  "compatability"
   end
 
   add_foreign_key "favorites", "matches"

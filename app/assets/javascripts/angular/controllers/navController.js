@@ -1,13 +1,18 @@
 app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", function($scope, userFactory, $location, $cookies){
+  $cookies.put('id', 1);
   if($cookies.get('id')){
     $scope.current_user = true
     $scope.current_user_id = $cookies.get('id')
+  } else {
+    $scope.current_user = false
+    $location.url('/');
   }
 
   $scope.logout = function(){
     $scope.currentUser = {};
     $cookies.remove("id");
-    $location.url('/home');
+    $scope.current_user = false
+    $location.url('/');
   }
 
   userFactory.getUser($scope.current_user_id, function(data){

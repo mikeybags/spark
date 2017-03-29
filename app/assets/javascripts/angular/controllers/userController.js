@@ -6,20 +6,6 @@ if($cookies.get('id')){
   $scope.view = 0
 }
 
-$scope.profile_id = $routeParams.id
-
-$scope.showUser = function() {
-  userFactory.getUser($scope.profile_id, function(data){
-    if(data.err){
-      console.log(data.err)
-    }
-    else{
-      $scope.user = data
-    }
-  })
-}
-$scope.showUser();
-
 $scope.user = {body_type: "no answer", religion: "no answer", feet: "-", inches: "-", relationship_status: "never married", have_children: "false", want_children: "no answer", number_children: '0', salary:
 'no answer', smoker: 'no answer', drinker: 'no answer', education_level: 'no answer'}
 $scope.createUser = function(){

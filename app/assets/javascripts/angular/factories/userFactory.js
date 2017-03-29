@@ -9,6 +9,7 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
 
   factory.showUser = function(user_id, callback) {
     $http.get('users/'+user_id).then(function(data){
+      console.log(data)
       callback(data.data)
     })
   }

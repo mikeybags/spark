@@ -10,6 +10,8 @@
     <input type="text" class="form-control" name="email" ng-model="user.email">
     <label for="birthday">Birthday: </label>
     <input type="date" class='form-control' name="birthday" ng-model="user.birthday">
+    <label for="zipcode">Zipcode: </label>
+    <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
     <label for="password">Password: </label>
     <input type="password" class="form-control" name="password" ng-model="user.password">
     <label for="password_confirmation">Confirm Password: </label>
@@ -128,7 +130,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateMoreAttributes()">
-<<<<<<< HEAD
       <div class="row">
         <label for="ethnicity">Ethnicity: </label>
         <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
@@ -191,8 +192,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateBio()">
-      <label for="zipcode">Zipcode: </label>
-      <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
       <label for="bio">Bio: </label>
       <textarea ng-model="user.bio" class="form-control" rows="8" cols="80"></textarea>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">

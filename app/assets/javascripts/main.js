@@ -30,7 +30,7 @@ app.config(function ($routeProvider) {
     controller: "navController"
   })
   .when('/messages', {
-    templateUrl: "../templates/messages.html"
+    templateUrl: "../templates/messages.html",
     controller: "messageController"
   })
   .when('/discover', {

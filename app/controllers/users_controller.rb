@@ -58,8 +58,7 @@ class UsersController < ApplicationController
   end
 
   def bio
-    location = ZipCodes.identify(params[:zipcode].to_s)
-    user = User.update(params[:id], zipcode: params[:zipcode], bio: params[:bio], city: location[:city], state: location[:state_name])
+    user = User.update(params[:id], bio: params[:bio])
     if user.valid?
       render json: {user: user}
     else
@@ -78,7 +77,7 @@ class UsersController < ApplicationController
     pref = current_user.preference
     maximum_date = Time.now - (31536000 * pref.minimum_age)
     minimum_date = Time.now - (31536000 * pref.maximum_age)
-    users = User.includes(:preference).where("gender = ?", pref.gender).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day)
+    users = User.includes(:preference).where("gender = ? AND city = ? AND state = ?", pref.gender, current_user.city, current_user.state).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day)
     if current_user.want_children = "yes"
       users = users.where(:want_children => ["yes", "maybe"])
     elsif current_user.want_children = "no"

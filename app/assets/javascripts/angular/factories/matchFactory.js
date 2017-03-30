@@ -41,6 +41,16 @@ app.factory("matchFactory", ['$http', function($http){
       callback(data.data);
     })
   }
+  factory.getRejectedMatches = function(user, callback){
+    $http.get(`/users/${user}/matches/rejected`).then(function(data){
+      callback(data.data);
+    })
+  }
+  factory.reject = function(user, requester, callback){
+    $http.post(`/users/${user}/reject`, {"requester":requester}).then(function(data){
+      callback(data.data)
+    })
+  }
  return factory
 
 }])

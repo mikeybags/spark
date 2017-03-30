@@ -106,6 +106,9 @@ class UsersController < ApplicationController
       match = already_exists[0]
       if match.accepted == false
         match.accepted = true
+        if match.rejected = true
+          match.rejected = false
+        end
         match.save
         render json: {"saved" => true}
       else
@@ -140,7 +143,7 @@ class UsersController < ApplicationController
   def getPendingMatches
     user = User.includes(:preference).find(params[:id])
     pref = user.preference
-    matches = user.pending_received_users.includes(:preference)
+    matches = user.pending_received_users.includes(:preference).where("rejected = false")
     matches = compatability_test(user, matches, pref)
     render json: matches
   end
@@ -258,6 +261,22 @@ class UsersController < ApplicationController
     else
       render json: {errors: 'Combination does not exist'}
     end
+  end
+
+  def createReject
+    match = Match.where("acceptor_id = #{params[:id]} AND requester_id = #{params[:requester]}")
+    match = match[0]
+    match.rejected = true
+    match.save
+    render json: match
+  end
+
+  def getRejectedMatches
+    user = User.includes(:preference).find(params[:id])
+    pref = user.preference
+    matches = user.pending_received_users.includes(:preference).where("rejected = true")
+    matches = compatability_test(user, matches, pref)
+    render json: matches
   end
 
   def messaging

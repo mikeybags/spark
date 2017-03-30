@@ -178,7 +178,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angular-ui-bootstrap-rails
+  angular-ui-bootstrap-rails (~> 2.4)
   angular_rails_csrf
   autoprefixer-rails
   bcrypt (~> 3.1.7)

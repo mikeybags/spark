@@ -10,6 +10,8 @@
     <input type="text" class="form-control" name="email" ng-model="user.email">
     <label for="birthday">Birthday: </label>
     <input type="date" class='form-control' name="birthday" ng-model="user.birthday">
+    <label for="zipcode">Zipcode: </label>
+    <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
     <label for="password">Password: </label>
     <input type="password" class="form-control" name="password" ng-model="user.password">
     <label for="password_confirmation">Confirm Password: </label>
@@ -91,7 +93,7 @@
     <label for="relationship_status">Relationship Status: </label>
     <select ng-model="user.relationship_status">
       <option value="never married">Never Married</option>
-      <option value="currently seperated">Currently Seperated</option>
+      <option value="currently separated">Currently Separated</option>
       <option value="divorced">Divorced</option>
       <option value="widow | widower">Widow | Widower</option>
     </select>
@@ -113,12 +115,9 @@
     <label for="want_children">Want kids: </label>
     <select ng-model="user.want_children">
       <option value="no answer">No Answer</option>
-      <option value="definetly">Definetly</option>
-      <option value="someday">Someday</option>
-      <option value="not sure">Not Sure</option>
-      <option value="probrably not">Probrably not</option>
+      <option value="yes">Yes</option>
+      <option value="maybe">Maybe</option>
       <option value="no">No</option>
-      <option value="no, but it's ok if my partner has kids">No, but it's OK if my partner has kids</option>
     </select>
     </div>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
@@ -193,8 +192,6 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateBio()">
-      <label for="zipcode">Zipcode: </label>
-      <input type="text" class="form-control" ng-model="user.zipcode" maxlength="5">
       <label for="bio">Bio: </label>
       <textarea ng-model="user.bio" class="form-control" rows="8" cols="80"></textarea>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">

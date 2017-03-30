@@ -1,3 +1,4 @@
+
 app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", "$uibModal", function($scope, userFactory, $location, $cookies, $uibModal){
   if($cookies.get('id')){
     $scope.current_user = true
@@ -10,8 +11,8 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
   $scope.logout = function(){
     $scope.currentUser = {};
     $cookies.remove("id");
-    $scope.current_user=false
-    $location.url('/home');
+    $scope.current_user = false
+    $location.url('/');
   }
 
   $scope.login = function(){

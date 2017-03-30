@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.string   "body_type"
     t.string   "relationship_status"
     t.string   "has_children"
-    t.string   "want_children"
     t.string   "smokes"
     t.string   "drinks"
     t.string   "ethnicity"
@@ -80,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.datetime "updated_at",          null: false
     t.string   "personalities"
     t.string   "gender"
+    t.string   "salary"
     t.index ["user_id"], name: "index_preferences_on_user_id", using: :btree
   end
 
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.datetime "profile_picture_updated_at"
     t.string   "city"
     t.string   "state"
+    t.integer  "compatability"
   end
 
   add_foreign_key "favorites", "matches"

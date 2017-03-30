@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'users/attributes' => 'users#attributes'
   post 'users/bio' => 'users#bio'
   put 'users/image/:id' => 'users#image'
+  get 'users/:id/discover' => 'users#discover'
   post 'users/personality' => 'users#updatePersonality'
   post 'users/login' => 'users#login'
   get 'users/zipcode' => 'users#zipcode'

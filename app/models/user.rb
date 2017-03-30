@@ -12,10 +12,8 @@ class User < ApplicationRecord
    has_many :user_interests
    has_many :interests, class_name: "Interest", through: 'user_interests'
    has_many :pictures
-   has_one :preference
-   has_many :matches
-   has_many :messages
-   has_many :favorites
+   has_one :preference, dependent: :destroy
+
    has_many :sent_requests_pending,-> { where accepted: false }, class_name: "Match", foreign_key: "requester_id"
    has_many :pending_sent_users, class_name: "User", through: "sent_requests_pending", source: "acceptor"
 
@@ -27,4 +25,16 @@ class User < ApplicationRecord
 
    has_many :received_requests_accepted, -> { where accepted:  true }, class_name: "Match", foreign_key: "requester_id"
    has_many :accepted_received_users, class_name: "User", through: "received_requests_accepted", source: "acceptor"
+
+   has_many :messages
+   has_many :favorites
+
+  before_save :add_state_city
+
+   private
+   def add_state_city
+     location = ZipCodes.identify(self.zipcode.to_s)
+     self.city = location[:city]
+     self.state = location[:state_code]
+   end
 end

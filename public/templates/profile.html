@@ -1,14 +1,35 @@
 <div>
-  <div id="profile-sidebar" class="col-md-3">
-    <img ng-src="{{user.profile_picture}}" alt="Profile Picture">
-    <button type="button" name="button"></button>
+  <div id="profile-sidebar" class="col-sm-3 text-center">
+    <br><br>
+    <img id="profile_picture" ng-src="{{user.profile_picture}}" alt="Profile Picture">
+    <br><br>
+    <a class="btn btn-block btn-primary" href="">Send Message</a>
   </div>
-  <div id="profile-content" class="col-md-9">
+  <div id="profile-content" class="col-sm-9">
+    <br>
+    <h3>{{ user.username }}</h3>
+    <h5>{{ calculateAge(user.birthday) }} year old {{ user.gender }} | {{ location.formatted_address }} | Seeking {{ preferences.gender }}s {{ preferences.minimum_age }} - {{ preferences.maximum_age }} within {{ preferences.distance }} </h5>
+    <uib-tabset active="active">
+      <uib-tab index="0" heading="About">
+        <h3>Details</h3>
+        <p>Relationship: {{ user.relationship_status }}</p>
+        <p>Have Kids: <span ng-if="user.have_children">Yes</span><span ng-if="!user.have_children">No</span></p>
+        <p ng-if="user.have_children">Number of Children: {{ user.number_children }}</p>
+        <p>Want Kids: {{ user.want_children }}</p>
+        <p>Ethnicity: {{ user.ethnicity }}</p>
+        <p>Body Type: {{ user.body_type }}</p>
+        <p>Height: {{ user.height/12 }}' {{ user.height%12 }}"</p>
+        <p>Faith: {{ user.religion }}</p>
+        <p>Smoke: {{ user.smoker }}</p>
+        <p>Drink: {{ user.drinker }}</p>
+      </uib-tab>
+      <uib-tab index="1" heading="Photos">
+        Photos will go here
+      </uib-tab>
+      <uib-tab index="2" heading="Our History">
+        History will go here
+      </uib-tab>
+    </uib-tabset>
+  </div>
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">About</a></li>
-      <li><a href="#">Photos</a></li>
-      <li><a href="#">Our History</a></li>
-    </ul>
-  </div>
 </div>

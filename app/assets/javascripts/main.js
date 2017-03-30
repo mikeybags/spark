@@ -23,7 +23,7 @@ app.config(function ($routeProvider) {
   })
   .when('/users/:id', {
     templateUrl: "../templates/profile.html",
-    controller: "userController"
+    controller: "profileController"
   })
   .when('/login', {
     templateUrl: "../templates/login.html",
@@ -32,6 +32,10 @@ app.config(function ($routeProvider) {
   .when('/messages', {
     templateUrl: "../templates/messages.html",
     controller: "messageController"
+  })
+  .when('/discover', {
+    templateUrl: "../templates/discover.html",
+    controller: "discoverController"
   })
   .otherwise({
     redirectTo: '/'

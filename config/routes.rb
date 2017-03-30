@@ -8,11 +8,15 @@ Rails.application.routes.draw do
   post 'users/bio' => 'users#bio'
   post 'users/preferences' => 'users#preferences'
   put 'users/image/:id' => 'users#image'
-  get 'users/:id/discover' => 'users#discover'
+  get 'users/:id/discover/:start' => 'users#discover'
   post 'users/personality' => 'users#updatePersonality'
   post 'users/login' => 'users#login'
   get 'users/zipcode' => 'users#zipcode'
   get 'users/:id' => 'users#show'
   get 'messages' => 'messages#show'
+  post 'users/:id/matches' => 'users#createMatch'
+  get 'users/:id/matches' => 'users#getMatches'
+  get 'users/:id/matches/pending' => 'users#getPendingMatches'
+  get 'users/:id/sent_requests' => 'users#getSentMatches'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

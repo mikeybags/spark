@@ -79,7 +79,7 @@ class UsersController < ApplicationController
     pref = current_user.preference
     maximum_date = Time.now - (31536000 * pref.minimum_age)
     minimum_date = Time.now - (31536000 * pref.maximum_age)
-    users = User.includes(:preference).where("gender = ? AND city = ? AND state = ?", pref.gender, current_user.city, current_user.state).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day)
+    users = User.includes(:preference).where("gender = ? AND city = ? AND state = ?", pref.gender, current_user.city, current_user.state).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day).limit(8).offset(params[:start].to_i)
     if current_user.want_children = "yes"
       users = users.where(:want_children => ["yes", "maybe"])
     elsif current_user.want_children = "no"
@@ -88,12 +88,64 @@ class UsersController < ApplicationController
     if pref.has_children = "no"
       users = users.where(have_children:false)
     end
+    users = compatability_test(current_user, users, pref)
+    render json: users
+  end
+
+  def createMatch
+    user = User.find(params[:id])
+    already_exists = Match.where("(requester_id = #{params[:id]} AND acceptor_id = #{params[:receiver]}) OR (requester_id = #{params[:receiver]} AND acceptor_id = #{params[:id]})")
+    if already_exists.length > 0
+      puts already_exists.inspect
+      match = already_exists[0]
+      if match.accepted == false
+        match.accepted = true
+        match.save
+        render json: {"saved" => true}
+      else
+        render json: {"error" => "Match already exists"}
+      end
+    else
+      match = Match.create(requester:user, acceptor:User.find(params[:receiver]))
+      render json: match
+    end
+  end
+
+  def getSentMatches
+    requests = Match.where("requester_id = ?", params[:id])
+    matches = Match.where("acceptor_id = ? AND accepted = true", params[:id])
+    dont_show = {}
+    requests.each do |request|
+      dont_show[request.acceptor_id.to_s] = true
+    end
+    matches.each do |match|
+      dont_show[match.requester_id.to_s] = true
+    end
+    render json: dont_show
+  end
+
+  def getMatches
+    user = User.find(params[:id])
+    matches = user.sent_requests_accepted + user.received_requests_accepted
+    user_matches = user.accepted_sent_users + user.accepted_received_users
+    render json: {"matches": matches, "user_matches": user_matches}
+  end
+
+  def getPendingMatches
+    user = User.includes(:preference).find(params[:id])
+    pref = user.preference
+    matches = user.pending_received_users.includes(:preference)
+    matches = compatability_test(user, matches, pref)
+    render json: matches
+  end
+
+  def compatability_test(current_user, users, pref)
     users.each do |person|
       matched_on = []
       person.compatability = 0
-      if person.preference.gender != current_user.gender
-        person.compatability -= 1000
-      end
+        if person.preference.gender != current_user.gender
+          person.compatability -= 1000
+        end
       if pref.body_type == nil
         person.compatability += 3
         matched_on << "body_type"
@@ -167,14 +219,13 @@ class UsersController < ApplicationController
         person.compatability += 45
       end
       if matched_on.include?(pref.most_important)
-        person.compatability += 5
+        person.compatability += 15
       end
       unless matched_on.include?(pref.dealbreaker)
         person.compatability -= 30
       end
-      puts person.compatability
     end
-    render json: users
+    return users
   end
 
   def updatePersonality
@@ -211,8 +262,6 @@ class UsersController < ApplicationController
   end
 
   def preferences
-    puts "we are inside of preferences"
-    puts "params are ", params.inspect
     user_prefs = Preference.find_by_user_id(params[:user_id])
     user_prefs.update(gender: params[:gender], minimum_age: params[:minimum_age], maximum_age: params[:maximum_age], body_type: params[:body_type], relationship_status: params[:relationship_status], has_children: params[:has_children], smokes: params[:smokes], drinks: params[:drinks], ethnicity: params[:ethnicity], religion: params[:religion], education: params[:education], minimum_height: params[:minimum_height], maximum_height: params[:maximum_height], salary: params[:salary], dealbreaker: params[:dealbreaker], most_important: params[:most_important])
     user_prefs.save
@@ -221,8 +270,8 @@ class UsersController < ApplicationController
     else
       render json: {errors: user.errors.full_messages}
     end
-
   end
+
   private
   def user_params
     params.require(:user).permit(:profile_picture)

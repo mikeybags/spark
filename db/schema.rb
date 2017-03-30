@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170330061548) do
     t.boolean  "accepted",     default: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.boolean  "rejected",     default: false
     t.index ["acceptor_id"], name: "index_matches_on_acceptor_id", using: :btree
     t.index ["requester_id"], name: "index_matches_on_requester_id", using: :btree
   end

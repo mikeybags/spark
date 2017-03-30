@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329134813) do
+ActiveRecord::Schema.define(version: 20170330143417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.boolean  "accepted",     default: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.boolean  "rejected",     default: false
     t.index ["acceptor_id"], name: "index_matches_on_acceptor_id", using: :btree
     t.index ["requester_id"], name: "index_matches_on_requester_id", using: :btree
   end
@@ -112,8 +113,8 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.text     "bio"
     t.string   "profile_picture"
     t.integer  "zipcode"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 20170329134813) do
     t.string   "city"
     t.string   "state"
     t.integer  "compatability"
+    t.integer  "profile_viewed",               default: 0
   end
 
   add_foreign_key "favorites", "matches"

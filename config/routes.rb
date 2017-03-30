@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'users/attributes' => 'users#attributes'
   post 'users/bio' => 'users#bio'
   put 'users/image/:id' => 'users#image'
-  get 'users/:id/discover' => 'users#discover'
+  get 'users/:id/discover/:start' => 'users#discover'
   post 'users/personality' => 'users#updatePersonality'
   post 'users/login' => 'users#login'
   get 'users/zipcode' => 'users#zipcode'
@@ -17,8 +17,12 @@ Rails.application.routes.draw do
   post 'messages/create' => 'messages#create'
   post 'messages/:id' => 'messages#show'
   post 'matches/:id' => 'matches#show'
-
+  post 'users/:id/matches' => 'users#createMatch'
+  get 'users/:id/matches' => 'users#getMatches'
+  get 'users/:id/matches/pending' => 'users#getPendingMatches'
+  get 'users/:id/sent_requests' => 'users#getSentMatches'
 
   mount ActionCable.server => '/cable'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

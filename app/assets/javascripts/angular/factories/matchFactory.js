@@ -1,6 +1,5 @@
 app.factory("matchFactory", ['$http', function($http){
  var factory = {}
-<<<<<<< HEAD
   factory.user_matches = function(id, callback){
     $http.post('/matches/'+id).then(function(data){
       callback(data.data)
@@ -14,11 +13,32 @@ app.factory("matchFactory", ['$http', function($http){
   factory.sendMessage = function(message, callback){
     $http.post('/messages/create', message).then(function(data){
       callback(data.data)
-=======
-  factory.getUsers = function(user_id, callback){
-    $http.get(`/users/${user_id}/discover`).then(function(data){
+  })
+}
+  factory.getUsers = function(user_id, start, callback){
+    $http.get(`/users/${user_id}/discover/${start}`).then(function(data){
       callback(data.data);
->>>>>>> 1c115e93d3490bf7fb10db344536de9e430b72e9
+    })
+  }
+  factory.match = function(sender, receiver, callback){
+    $http.post(`/users/${sender}/matches`, {"receiver":receiver}).then(function(data){
+      console.log(data);
+      callback(data.data)
+    })
+  }
+  factory.getSentMatches = function(user, callback){
+    $http.get(`/users/${user}/sent_requests`).then(function(data){
+      callback(data.data)
+    })
+  }
+  factory.getMatches = function(user, callback){
+    $http.get(`/users/${user}/matches`).then(function(data){
+      callback(data.data);
+    })
+  }
+  factory.getPendingMatches = function(user, callback){
+    $http.get(`/users/${user}/matches/pending`).then(function(data){
+      callback(data.data);
     })
   }
  return factory

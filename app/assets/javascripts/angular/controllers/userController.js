@@ -6,8 +6,8 @@ if($cookies.get('id')){
   $scope.view = 0
 }
 
-$scope.user = {body_type: "no answer", religion: "no answer", feet: "-", inches: "-", relationship_status: "never married", have_children: "false", want_children: "no answer", number_children: '0', salary:
-'no answer', smoker: 'no answer', drinker: 'no answer', education_level: 'no answer'}
+$scope.user = {body_type: "No Answer", religion: "No Answer", feet: "-", inches: "-", relationship_status: "Never Married", have_children: "False", want_children: "No Answer", number_children: '0', salary:
+'No Answer', smoker: 'No Answer', drinker: 'No Answer', education_level: 'No Answer'}
 $scope.createUser = function(){
   if($cookies.get('id')){
     $scope.errors = 'Cannot Go Back'
@@ -66,6 +66,7 @@ $scope.createUser = function(){
         $scope.user.ethnicity += ', '
       }
     }
+    $scope.user.ethnicity = $scope.user.ethnicity.slice(0, -2);
     userFactory.updateMoreAttributes($scope.user, function(data){
       if(data.errors){
         $scope.errors = data.errors

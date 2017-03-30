@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'users/relationship' => 'users#relationship'
   post 'users/attributes' => 'users#attributes'
   post 'users/bio' => 'users#bio'
+  post 'users/preferences' => 'users#preferences'
   put 'users/image/:id' => 'users#image'
   get 'users/:id/discover/:start' => 'users#discover'
   post 'users/personality' => 'users#updatePersonality'

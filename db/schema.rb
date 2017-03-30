@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170330143417) do
+=======
+ActiveRecord::Schema.define(version: 20170330061548) do
+>>>>>>> be8f4f5eca2aa49542a92dafea0eaa89d6273be2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,14 +68,14 @@ ActiveRecord::Schema.define(version: 20170330143417) do
     t.integer  "distance"
     t.integer  "minimum_age"
     t.integer  "maximum_age"
-    t.string   "body_type"
-    t.string   "relationship_status"
+    t.string   "body_type",                        array: true
+    t.string   "relationship_status",              array: true
     t.string   "has_children"
-    t.string   "smokes"
-    t.string   "drinks"
-    t.string   "ethnicity"
-    t.string   "religion"
-    t.string   "education"
+    t.string   "smokes",                           array: true
+    t.string   "drinks",                           array: true
+    t.string   "ethnicity",                        array: true
+    t.string   "religion",                         array: true
+    t.string   "education",                        array: true
     t.integer  "minimum_height"
     t.integer  "maximum_height"
     t.string   "dealbreaker"
@@ -80,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170330143417) do
     t.datetime "updated_at",          null: false
     t.string   "personalities"
     t.string   "gender"
-    t.string   "salary"
+    t.string   "salary",                           array: true
     t.index ["user_id"], name: "index_preferences_on_user_id", using: :btree
   end
 
@@ -112,9 +116,15 @@ ActiveRecord::Schema.define(version: 20170330143417) do
     t.string   "salary"
     t.text     "bio"
     t.string   "profile_picture"
+<<<<<<< HEAD
     t.integer  "zipcode"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+=======
+    t.string   "zipcode"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+>>>>>>> be8f4f5eca2aa49542a92dafea0eaa89d6273be2
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"

@@ -25,11 +25,11 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form class="form" ng-submit="updateTraits()">
-    <div class="row">
+    <div>
     <label for="gender">Gender</label>
     <select name="user.gender">
       <option value="Man">Man</option>
-      <option value="Women">Women</option>
+      <option value="Woman">Woman</option>
     </select>
     <label for="height">Height: </label>
     <select ng-model="user.feet">
@@ -58,27 +58,27 @@
     </select>
     <p class="height">Inches</p>
     </div>
-    <div class="row">
+    <div>
     <label name="body_type">Body Type: </label>
     <select class="form-control" ng-model="user.body_type">
-      <option value="no answer">No Answer</option>
-      <option value="slender">Slender</option>
-      <option value="athletic and toned">Athletic and Toned</option>
-      <option value="heavyset">Heavyset</option>
-      <option value="a few extra pounds">A Few Extra Pounds</option>
-      <option value="stocky">Stocky</option>
+      <option value="No Answer">No Answer</option>
+      <option value="Slender">Slender</option>
+      <option value="Athletic and toned">Athletic and Toned</option>
+      <option value="Heavyset">Heavyset</option>
+      <option value="A few extra pounds">A Few Extra Pounds</option>
+      <option value="Stocky">Stocky</option>
     </select>
     <label for="religion">Faith: </label>
     <select class="form-control" ng-model="user.religion">
-      <option value="no answer">No Answer</option>
-      <option value="atheist">Atheist</option>
-      <option value="christian">Christian</option>
-      <option value="jewish">Jewish</option>
-      <option value="muslim">Muslim</option>
-      <option value="other">Other</option>
+      <option value="No answer">No Answer</option>
+      <option value="Atheist">Atheist</option>
+      <option value="Christian">Christian</option>
+      <option value="Jewish">Jewish</option>
+      <option value="Muslim">Muslim</option>
+      <option value="Other">Other</option>
     </select>
     </div>
-    <div class="row">
+    <div>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
     </div>
   </form>
@@ -89,13 +89,13 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateRelationship()">
-    <div class="row">
+    <div >
     <label for="relationship_status">Relationship Status: </label>
     <select ng-model="user.relationship_status">
-      <option value="never married">Never Married</option>
-      <option value="currently separated">Currently Separated</option>
-      <option value="divorced">Divorced</option>
-      <option value="widow | widower">Widow | Widower</option>
+      <option value="Never married">Never Married</option>
+      <option value="Currently separated">Currently Separated</option>
+      <option value="Divorced">Divorced</option>
+      <option value="Widow/Widower">Widow/Widower</option>
     </select>
     <label for="have_children">Have kids: </label>
     <select ng-model="user.have_children">
@@ -103,21 +103,21 @@
       <option value="true">Yes</option>
     </select>
     </div>
-    <div class="row">
+    <div>
     <label for="number_children">Number of kids: </label>
     <select ng-model="user.number_children">
       <option value="0">0</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
-      <option value="4">4</option>
+      <option value="4+">4+</option>
     </select>
     <label for="want_children">Want kids: </label>
     <select ng-model="user.want_children">
-      <option value="no answer">No Answer</option>
-      <option value="yes">Yes</option>
-      <option value="maybe">Maybe</option>
-      <option value="no">No</option>
+      <option value="No answer">No Answer</option>
+      <option value="Yes">Yes</option>
+      <option value="Maybe">Maybe</option>
+      <option value="No">No</option>
     </select>
     </div>
       <input type="submit" class="btn btn-primary pull-right" value="Add Features">
@@ -130,48 +130,48 @@
   <h3>Page {{view + 1}} of 6</h3>
   <hr>
   <form ng-submit="updateMoreAttributes()">
-      <div class="row">
+      <div >
         <label for="ethnicity">Ethnicity: </label>
-        <input type="checkbox" ng-model="user.race.asian" value="asian"> Asian
-        <input type="checkbox" ng-model="user.race.black" value="black"> Black / African Descent
-        <input type="checkbox" ng-model="user.race.latino" value="latino"> Latino
-        <input type="checkbox" ng-model="user.race.white" value="white"> White / Caucasian
-        <input type="checkbox" ng-model="user.race.other" value="other"> Other
+        <input type="checkbox" ng-model="user.race.Asian" value="Asian"> Asian
+        <input type="checkbox" ng-model="user.race.Black" value="Black"> Black / African Descent
+        <input type="checkbox" ng-model="user.race.Latino" value="Latino"> Latino
+        <input type="checkbox" ng-model="user.race.White" value="White"> White / Caucasian
+        <input type="checkbox" ng-model="user.race.Other" value="Other"> Other
       </div>
-      <div class="row">
+      <div >
         <label for="smoker">Smoke: </label>
         <select ng-model="user.smoker">
-          <option value="no answer">No Answer</option>
-          <option value="no way">No Way</option>
-          <option value="occasionally">Occasionally</option>
-          <option value="daily">Daily</option>
-          <option value="cigar aficionado">Cigar aficionado</option>
-          <option value="yes, but trying to quit">Yes, but trying to quit</option>
+          <option value="No answer">No Answer</option>
+          <option value="No way">No Way</option>
+          <option value="Occasionally">Occasionally</option>
+          <option value="Daily">Daily</option>
+          <option value="Cigar aficionado">Cigar aficionado</option>
+          <option value="Yes, but trying to quit">Yes, but trying to quit</option>
         </select>
         <label for="drinker">Drink: </label>
         <select ng-model="user.drinker">
-          <option value="no answer">No Answer</option>
-          <option value="never">Never</option>
-          <option value="social drinker">Social Drinker</option>
-          <option value="regularly">Regularly</option>
-          <option value="moderately">Moderately</option>
+          <option value="No answer">No Answer</option>
+          <option value="Never">Never</option>
+          <option value="Social drinker">Social Drinker</option>
+          <option value="Regularly">Regularly</option>
+          <option value="Moderately">Moderately</option>
         </select>
       </div>
-      <div class="row">
+      <div >
         <label for="education_level">Highest Level of Education: </label>
         <select ng-model="user.education_level">
-          <option value="no answer">No Answer</option>
-          <option value="high school">High school</option>
-          <option value="some college">Some college</option>
-          <option value="associates degree">associates degree</option>
-          <option value="bachelors degree">bachelors degree</option>
-          <option value="graduate degree">graduate degree</option>
-          <option value="phd / post doctoral">phd / post doctoral</option>
+          <option value="No answer">No Answer</option>
+          <option value="High school">High school</option>
+          <option value="Some college">Some college</option>
+          <option value="Associates degree">Associates degree</option>
+          <option value="Bachelors degree">Bachelors degree</option>
+          <option value="Graduate degree">Graduate degree</option>
+          <option value="PhD/Post doctoral">PhD / Post Doctoral</option>
         </select>
         <label for="salary">Salary: </label>
         <select ng-model="user.salary">
-          <option value="no answer">No Answer</option>
-          <option value="less than 25,000">less than $25,000</option>
+          <option value="No answer">No Answer</option>
+          <option value="Less than 25,000">less than $25,000</option>
           <option value="$25,001 to $35,000">$25,001 to $35,000</option>
           <option value="$35,001 to $50,000">$35,001 to $50,000</option>
           <option value="$50,001 to $75,000">$50,001 to $75,000</option>
@@ -180,7 +180,7 @@
           <option value="$150,001+">$150,001+</option>
         </select>
       </div>
-      <div class="row">
+      <div >
         <input type="submit" class="btn btn-primary pull-right" value="Add Features">
       </div>
   </form>

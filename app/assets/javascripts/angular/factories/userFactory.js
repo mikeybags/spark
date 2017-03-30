@@ -59,5 +59,11 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
       callback(data.data)
     })
   }
+  factory.setPreferences = function(preferences, callback){
+    console.log(preferences)
+    $http.post('/users/preferences', preferences).then(function(data){
+      callback(data.data)
+    })
+  }
   return factory
 }])

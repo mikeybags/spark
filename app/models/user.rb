@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
-  # has_attached_file :profile_picture,
-  #                   :styles => {medium: "300x300>", thumb: "100x100#"},
-  #                   default_url: "/images/:style/missing.png"
-  # validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
+
+  has_attached_file :profile_picture,
+                    :styles => {medium: "300x300>", thumb: "100x100#"},
+                    default_url: "assets/default.jpeg"
+  validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
+
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
    validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
    validates :username, uniqueness: true
@@ -34,7 +36,7 @@ class User < ApplicationRecord
 
    private
    def add_state_city
-     location = ZipCodes.identify(self.zipcode.to_s)
+     location = ZipCodes.identify(self.zipcode)
      self.city = location[:city]
      self.state = location[:state_code]
    end

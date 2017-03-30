@@ -21,6 +21,10 @@ girl3 = User.create({email:'vanessa@email.com', username:"VWVan", gender: "woman
 
  preference1 = Preference.create([{user:User.find(1), gender: "woman", minimum_age:22, maximum_age:30, body_type:"slender,athletic and toned,stocky", relationship_status:"never married,widow | widower", salary: nil,  has_children:"no", smokes: "no way,occasionally,cigar aficionado", drinks: "social drinker,regularly,moderately", ethnicity: "white,black,asian", maximum_height: 70, minimum_height:55, religion: "atheist,jewish,other", education:"bachelors degree,graduate degree,phd / post doctoral", dealbreaker: "smokes", most_important: "drinks", personalities: "INFP,ENFP,INFJ,ENFJ,INTP,ENTP,ISFP"}, {user:User.find(2), gender: "woman"}, {user:User.find(3), gender: "woman"}, {user:User.find(4), gender: "man"}, {user:User.find(5), gender: "man"}, {user:User.find(6), gender: "man"}])
 
+ preference2 = Preference.create({user:girl1, gender: "man", minimum_age:20, maximum_age:35, body_type:"slender,athletic and toned,stocky", relationship_status:"never married,widow | widower,currently separated", salary: nil,  has_children:"no", smokes: "no way,occasionally,cigar aficionado", drinks: "social drinker,regularly,moderately", ethnicity: "white,black,asian,other", maximum_height: 75, minimum_height:50, religion: "atheist,jewish,other,christian", education:"high school,bachelors degree,graduate degree,phd / post doctoral", dealbreaker: "smokes", most_important: "body_type", personalities: "INFJ,INTP,ENTP,ISFJ,ESFJ,ISTJ,ESTJ"})
+
+matches = Match.create([{requester:boy1,acceptor:girl1,accepted:true,rejected:false},{requester:girl2,acceptor:boy1,accepted:false,rejected:false},{requester:girl3,acceptor:boy1,accepted:false,rejected:true}, {requester:boy2,acceptor:girl1,accepted:true,rejected:false},{requester:boy3,acceptor:girl1,accepted:false,rejected:true}])
+
 user_interests = UserInterest.create([{user:User.find(1), interest:Interest.find(2)},
 {user:User.find(1), interest:Interest.find(3)},
 {user:User.find(1), interest:Interest.find(5)},
@@ -105,12 +109,25 @@ for i in 1..500 do
      4.times do
        UserInterest.create({user:user, interest:Interest.find(rand(1..15))})
      end
+
      preference = Preference.new()
      preference.user = user
+     randnum = rand(1..25)
      if user.gender == "man"
        preference.gender = "woman"
+       randnum
+       if randnum > 20
+         Match.create({requester:user, acceptor:girl1, accepted:true, rejected:false})
+       elsif randnum < 6
+         Match.create({requester:user, acceptor:girl1, accepted:false, rejected:false})
+       end
      else
        preference.gender = "man"
+       if randnum > 20
+         Match.create({requester:user, acceptor:boy1, accepted:true, rejected:false})
+       elsif randnum < 6
+         Match.create({requester:user, acceptor:boy1, accepted:false, rejected:false})
+       end
      end
      preference.save
    else

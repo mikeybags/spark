@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'users/:id/matches' => 'users#createMatch'
   get 'users/:id/matches' => 'users#getMatches'
   get 'users/:id/matches/pending' => 'users#getPendingMatches'
+  get 'users/:id/matches/rejected' => 'users#getRejectedMatches'
   get 'users/:id/sent_requests' => 'users#getSentMatches'
+  post 'users/:id/reject' => 'users#createReject'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

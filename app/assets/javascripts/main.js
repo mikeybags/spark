@@ -25,6 +25,10 @@ app.config(function ($routeProvider) {
     templateUrl: "../templates/profile.html",
     controller: "profileController"
   })
+  .when('/users/:id/edit', {
+    templateUrl: "../templates/editprofile.html",
+    controller: "editProfileController"
+  })
   .when('/login', {
     templateUrl: "../templates/login.html",
     controller: "navController"

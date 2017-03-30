@@ -3,8 +3,9 @@ require 'fileutils'
 class UsersController < ApplicationController
   def show
     user = User.find(params[:id])
-    if user
-      render json: user
+    preferences = Preference.find_by_user_id(params[:id])
+    if user && preferences
+      render json: {user: user, preferences: preferences}
     else
       render json: {errors: user.errors.full_messages}
     end
@@ -12,7 +13,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday])
+    puts params[:zipcode].length
+    user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday], zipcode: params[:zipcode])
     if user.valid?
       Preference.create(user:user)
       render json: {user: user}
@@ -95,49 +97,49 @@ class UsersController < ApplicationController
       if pref.body_type == nil
         person.compatability += 3
         matched_on << "body_type"
-      elsif pref.body_type.split(",").include?(person.body_type)
+      elsif pref.body_type.include?(person.body_type)
         person.compatability += 5
         matched_on << "body_type"
       end
       if pref.relationship_status == nil
         person.compatability += 3
         matched_on << "relationship_status"
-      elsif pref.relationship_status.split(",").include?(person.relationship_status)
+      elsif pref.relationship_status.include?(person.relationship_status)
         person.compatability += 5
         matched_on << "relationship_status"
       end
       if pref.smokes == nil
         person.compatability += 3
         matched_on << "smokes"
-      elsif pref.smokes.split(",").include?(person.smoker)
+      elsif pref.smokes.include?(person.smoker)
         person.compatability += 5
         matched_on << "smokes"
       end
       if pref.drinks == nil
         person.compatability += 3
         matched_on << "drinks"
-      elsif pref.drinks.split(",").include?(person.drinker)
+      elsif pref.drinks.include?(person.drinker)
         person.compatability += 5
         matched_on << "drinks"
       end
       if pref.religion == nil
         person.compatability += 3
         matched_on << "religion"
-      elsif pref.religion.split(",").include?(person.religion)
+      elsif pref.religion.include?(person.religion)
         person.compatability += 5
         matched_on << "religion"
       end
       if pref.education == nil
         person.compatability += 3
         matched_on << "education"
-      elsif pref.education.split(",").include?(person.education_level)
+      elsif pref.education.include?(person.education_level)
         person.compatability += 5
         matched_on << "education"
       end
       if pref.salary == nil
         person.compatability += 3
         matched_on << "salary"
-      elsif pref.salary.split(",").include?(person.salary)
+      elsif pref.salary.include?(person.salary)
         person.compatability += 5
         matched_on << "salary"
       end
@@ -145,7 +147,7 @@ class UsersController < ApplicationController
         person.compatability += 3
         matched_on << "ethnicity"
       else
-        ethnicities = pref.ethnicity.split(",") & person.ethnicity.split(",")
+        ethnicities = pref.ethnicity & person.ethnicity.split(",")
         if ethnicities.length > 0 || pref.ethnicity == nil
           person.compatability += 5
           matched_on << "ethnicity"
@@ -195,7 +197,7 @@ class UsersController < ApplicationController
     if user
       render json: {user: user}
     else
-      render json: {errors: 'user does not exist'}
+      render json: {errors: 'Combination does not exist'}
     end
   end
 
@@ -206,6 +208,20 @@ class UsersController < ApplicationController
     else
       render json: {errors: user.errors.full_messages}
     end
+  end
+
+  def preferences
+    puts "we are inside of preferences"
+    puts "params are ", params.inspect
+    user_prefs = Preference.find_by_user_id(params[:user_id])
+    user_prefs.update(gender: params[:gender], minimum_age: params[:minimum_age], maximum_age: params[:maximum_age], body_type: params[:body_type], relationship_status: params[:relationship_status], has_children: params[:has_children], smokes: params[:smokes], drinks: params[:drinks], ethnicity: params[:ethnicity], religion: params[:religion], education: params[:education], minimum_height: params[:minimum_height], maximum_height: params[:maximum_height], salary: params[:salary], dealbreaker: params[:dealbreaker], most_important: params[:most_important])
+    user_prefs.save
+    if user_prefs.valid?
+      render json: {preferences: user_prefs}
+    else
+      render json: {errors: user.errors.full_messages}
+    end
+
   end
   private
   def user_params

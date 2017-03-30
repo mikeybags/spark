@@ -12,16 +12,34 @@
     <uib-tabset active="active">
       <uib-tab index="0" heading="About">
         <h3>Details</h3>
-        <p>Relationship: {{ user.relationship_status }}</p>
+        <hr>
+        <p ng-if="user.relationship_status">Relationship: {{ user.relationship_status }}</p>
+        <p ng-if="!user.relationship_status">Relationship: No Answer</p>
         <p>Have Kids: <span ng-if="user.have_children">Yes</span><span ng-if="!user.have_children">No</span></p>
-        <p ng-if="user.have_children">Number of Children: {{ user.number_children }}</p>
-        <p>Want Kids: {{ user.want_children }}</p>
-        <p>Ethnicity: {{ user.ethnicity }}</p>
-        <p>Body Type: {{ user.body_type }}</p>
-        <p>Height: {{ user.height/12 }}' {{ user.height%12 }}"</p>
-        <p>Faith: {{ user.religion }}</p>
-        <p>Smoke: {{ user.smoker }}</p>
-        <p>Drink: {{ user.drinker }}</p>
+        <p ng-if="user.have_children && user.number_children">Number of Children: {{ user.number_children }}</p>
+        <p ng-if="user.have_chilren && !user.number_children">Number of Children: No Answer</p>
+        <p ng-if="user.want_children">Want Kids: {{ user.want_children }}</p>
+        <p ng-if="!user.want_children">Want Kids: No Answer</p>
+        <p ng-if="user.ethnicity">Ethnicity: {{ user.ethnicity }}</p>
+        <p ng-if="!user.ethnicity">Ethnicity: No Answer</p>
+        <p ng-if="user.body_type">Body Type: {{ user.body_type }}</p>
+        <p ng-if="!user.body_type">Body Type: No Answer</p>
+        <p ng-if="user.height">Height: {{ feet }}' {{ inches }}"</p>
+        <p ng-if="!user.height">Height: No Answer</p>
+        <p ng-if="user.education_level">Education Level: {{ user.education_level }}</p>
+        <p ng-if="!user.education_level">Education Level: No Answer</p>
+        <p ng-if="user.salary">Salary: {{ user.salary }}</p>
+        <p ng-if="!user.salary">Salary: No Answer</p>
+        <p ng-if="user.religion">Faith: {{ user.religion }}</p>
+        <p ng-if="!user.religion">Faith: No Answer</p>
+        <p ng-if="user.smoker">Smoke: {{ user.smoker }}</p>
+        <p ng-if="!user.smoker">Smoke: No Answer</p>
+        <p ng-if="user.drinker">Drink: {{ user.drinker }}</p>
+        <p ng-if="!user.drinker">Drink: No Answer</p>
+        <h3>In their own words</h3>
+        <hr>
+        <p ng-if="user.bio">{{ user.bio }}</p>
+        <p ng-if="!user.bio">{{ user.username }} hasn't added a bio yet!</p>
       </uib-tab>
       <uib-tab index="1" heading="Photos">
         Photos will go here

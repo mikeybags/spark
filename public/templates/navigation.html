@@ -14,7 +14,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle user-dropdown" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Discover<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a ng-href="#!">Go Search</a></li>
+              <li><a ng-href="#!/discover">Go Search</a></li>
               <li><a ng-href="#!">Mutual Match</a></li>
               <li><a ng-href="#!">Reverse Match</a></li>
             </ul>
@@ -49,7 +49,8 @@
           <li class="dropdown">
             <a id="picture-dropdown" class="dropdown-toggle user-picture-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="sm-user-img" ng-src="{{current_user.profile_picture}}"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a ng-href="#!/users/{{ current_user_id }}">View/Edit</a></li>
+              <li><a ng-href="#!/users/{{ current_user_id }}">View Your Profile</a></li>
+              <li><a ng-href="#!/users/{{ current_user_id }}/edit">Edit Your Profile</a></li>
               <li><a ng-href="#!">Photos</a></li>
             </ul>
           </li>
@@ -62,9 +63,9 @@
           </li>
         </ul>
         <ul ng-if="!current_user" class="nav navbar-nav navbar-right">
-          <li><a id="nav-login-button"><button id="sign_in" ng-click="sign_in()">Sign In</button></a></li>
+          <li><a id="nav-login-button" ng-href="#!/login"><button id="sign_in" ng-click="sign_in()">Sign In</button></a></li>
           <li><span class="nav-span">or</span></li>
-          <li><a id="nav-register-button" ng-click="register()"><button id="create_account">Create Account</button></a></li>
+          <li><a id="nav-register-button" ng-href="#!/register" ng-click="register()"><button id="create_account">Create Account</button></a></li>
         </ul>
     </div>
   </div>

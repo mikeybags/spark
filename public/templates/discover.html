@@ -1,12 +1,60 @@
 <h1 class="text-center">Discover</h1>
+<h4 class="text-center">Check out all of the Spark users near you that match your basic criteria.</h4>
+<h5 class="text-center"> Maybe view their profile, maybe send them a spark request. Who knows...maybe they'll just spark you back</h5>
 <div class="row">
-  <div class="col-xs-4">
-    <p>Refine Search</p>
+  <div class="col-xs-3">
+    <div id="filter" class="form-group">
+      <legend class="text-center">Filter Results</legend>
+      <select class="form-control" ng-model="propertyName">
+        <option value="-compatability" selected="selected">Compatability</option>
+        <option value="-birthday">Youngest First</option>
+        <option value="birthday">Oldest First</option>
+        <option value="username">Username</option>
+        <option value="-updated_at">Activity Date</option>
+      </select>
+      <h4>{{match_alert}}</h4>
+    </div>
   </div>
-  <div class="col-xs-8">
-    <div ng-repeat="person in users">
-      <p>{{person.username}} - compatability: {{person.compatability}}</p>
+  <div class="col-xs-9">
+    <div infinite-scroll="getUsers()" infinite-scroll-distance="0.4" infinite-scroll-disabled='busy'>
+      <div class="discover_person" ng-repeat="person in users | orderBy:propertyName">
+        <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+        <h5 class="text-center">{{person.username}}</h5>
+        <h5 class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</h5>
+        <p class="text-center">{{person.compatability}}% Match</p>
+        <div class="row">
+          <a uib-tooltip="View Profile" class="col-xs-4 col-xs-offset-1 btn btn-info" href="#!/users/{{person.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+          <button uib-tooltip="Spark Request" class="col-xs-4 col-xs-offset-2 btn btn-danger match-button" ng-click="match(person.id)" type="button" name="button"><span class="glyphicon glyphicon-heart"></span></button>
+        </div>
+      </div>
+      <div ng-show='busy'>Loading data...</div>
+      <div class="text-center" ng-show="done">No more matches :/</div>
     </div>
   </div>
 
 </div>
+
+<style media="screen">
+  .discover_person {
+    border:6px solid #CFCFEA;
+    border-radius: 5px;
+    padding:2px;
+    margin:8px;
+    display:inline-block;
+    vertical-align:top
+  }
+
+  #filter{
+    position:fixed;
+    margin: 0 auto;
+    right: -80;
+    top:30;
+  }
+</style>
+
+<script type="text/javascript">
+  $(document).on("click", ".match-button", function(){
+    $(this).parent().parent().fadeOut()
+  })
+
+</script>

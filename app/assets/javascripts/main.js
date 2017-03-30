@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngFileUpload", "ui.bootstrap"]);
+var app = angular.module("myApp", ["ngRoute", "ngCookies", "ngFileUpload", "ui.bootstrap", "infinite-scroll"]);
 app.config(function ($routeProvider) {
   $routeProvider
   .when('/', {
@@ -37,7 +37,19 @@ app.config(function ($routeProvider) {
     templateUrl: "../templates/discover.html",
     controller: "discoverController"
   })
+  .when('/matches', {
+    templateUrl: "../templates/matches.html",
+    controller: "matchController"
+  })
   .otherwise({
     redirectTo: '/'
   })
 })
+.filter('ageFilter', function() {
+   return function(birthdate) {
+     birthdate = new Date(birthdate)
+     var ageDifMs = Date.now() - birthdate.getTime();
+     var ageDate = new Date(ageDifMs); // miliseconds from epoch
+     return Math.abs(ageDate.getUTCFullYear() - 1970);
+   };
+});

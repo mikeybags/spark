@@ -1,0 +1,59 @@
+<div>
+  <div id="profile-content" class="col-sm-9">
+    <uib-tabset active="active">
+      <uib-tab index="0" heading="Matches" ng-click="getMatches()">
+        <div class="discover_person" ng-repeat="person in matches">
+          <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+          <h5 class="text-center">{{person.username}}</h5>
+          <h5 class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</h5>
+          <p class="text-center">Matched: {{person.matched_on | date}}</p>
+          <div class="row">
+            <button class="col-xs-6 col-xs-offset-3 btn btn-primary match-button" type="button" name="button">Message</button>
+          </div>
+        </div>
+        <div class="text-center" ng-show="done">No more matches :/</div>
+      </uib-tab>
+      <uib-tab index="1" heading="Pending Matches" ng-click="getPendingMatches()">
+        <div class="discover_person" ng-repeat="person in pending">
+          <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+          <h5 class="text-center">{{person.username}}</h5>
+          <h5 class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</h5>
+          <p class="text-center">{{person.compatability}}% Match</p>
+          <div class="row">
+            <button uib-tooltip="Reject" class="col-xs-4 col-xs-offset-1 btn btn-warning" type="button" name="button"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+            <button uib-tooltip="Match" class="col-xs-4 col-xs-offset-2 btn btn-success match-button" ng-click="match(person.id)" type="button" name="button"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+          </div>
+        </div>
+      </uib-tab>
+      <uib-tab index="2" heading="Rejected Matches" ng-click="getRejectedMatches()">
+        History will go here
+      </uib-tab>
+    </uib-tabset>
+  </div>
+
+</div>
+
+<style media="screen">
+  .discover_person {
+    border:6px solid #CFCFEA;
+    border-radius: 5px;
+    padding:2px;
+    margin:8px;
+    display:inline-block;
+    vertical-align:top
+  }
+
+  #filter{
+    position:fixed;
+    margin: 0 auto;
+    right: -80;
+    top:30;
+  }
+  </style>
+
+  <script type="text/javascript">
+    $(document).on("click", ".match-button", function(){
+      $(this).parent().parent().fadeOut()
+    })
+
+  </script>

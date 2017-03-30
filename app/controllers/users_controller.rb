@@ -5,13 +5,14 @@ class UsersController < ApplicationController
     puts params[:id]
     puts cookies.signed[:user_id]
     user = User.find(params[:id])
+    images = Picture.where(user_id: params[:id])
     preferences = Preference.find_by_user_id(params[:id])
     if user.id != cookies.signed[:user_id]
       user.profile_viewed += 1
       user.save
     end
     if user && preferences
-      render json: {user: user, preferences: preferences}
+      render json: {user: user, preferences: preferences, images: images}
     else
       render json: {errors: user.errors.full_messages}
     end
@@ -304,8 +305,17 @@ class UsersController < ApplicationController
       render json: {errors: user.errors.full_messages}
     end
   end
+
+  def moreImages
+    image = Picture.create(user: User.find(params[:id]))
+    image.update(image_params)
+    render json: {image: image}
+  end
   private
     def user_params
       params.require(:user).permit(:profile_picture)
+    end
+    def image_params
+      params.require(:user).permit(:image_path)
     end
 end

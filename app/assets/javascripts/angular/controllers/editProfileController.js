@@ -230,6 +230,28 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
      });
    };
 
+   $scope.image_upload = function (file) {
+     $scope.user.id = Number($cookies.get('id'))
+      Upload.upload({
+        url: 'users/moreimages/' + $scope.user.id,
+        method: 'PUT',
+        headers: { 'Content-Type': false },
+        fields: {
+          'user[image_path]': file,
+        },
+        file: file,
+        sendFieldsAs: 'json'
+      }).then(function (resp) {
+        console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
+        $scope.user = resp.data.user
+      }, function (resp) {
+        console.log('Error status: ' + resp.status);
+      }, function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+      });
+    };
+
    $scope.setPreferences = function() {
      $scope.prefs.user_id = $scope.profile_id
      if ($scope.prefs.max_feet && $scope.prefs.max_inches){

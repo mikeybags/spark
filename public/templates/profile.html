@@ -42,7 +42,13 @@
         <p ng-if="!user.bio">{{ user.username }} hasn't added a bio yet!</p>
       </uib-tab>
       <uib-tab index="1" heading="Photos">
-        Photos will go here
+        <div style="height: 1000px, width: 300px">
+          <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+             <div uib-slide ng-repeat="image in images">
+               <img ng-src="{{image.image_path}}" style="margin:auto;">
+             </div>
+           </div>
+         </div>
       </uib-tab>
       <uib-tab index="2" heading="Our History">
         History will go here

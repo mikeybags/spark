@@ -307,6 +307,10 @@
           <input type="submit" value="Submit">
         </form>
       </uib-tab>
+      <uib-tab index="2" heading="Your Images">
+        <h1>Upload More Photos</h1>
+        <input id="file-input" type="file" ngf-select="image_upload($file)" ng-model="users.image_path" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
+      </uib-tab>
     </uib-tabset>
   </div>
 

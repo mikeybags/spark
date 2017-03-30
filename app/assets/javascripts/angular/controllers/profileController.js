@@ -2,6 +2,9 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', '$locatio
   $scope.profile_id = $routeParams.id
   $scope.feet = 0
   $scope.inches = 0
+  $scope.myInterval = 5000;
+  $scope.noWrapSlides = false;
+  $scope.active = 0;
   $scope.showUser = function() {
     userFactory.showUser($scope.profile_id, function(data){
       if(data.err){
@@ -10,6 +13,8 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', '$locatio
       else{
         $scope.user = data.user
         $scope.preferences = data.preferences
+        $scope.images = data.images
+        console.log($scope.images)
         $scope.findLocation($scope.user)
         $scope.heightInFeet($scope.user.height)
       }
@@ -36,25 +41,5 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', '$locatio
     $scope.inches = height % 12
   }
 
-  $scope.upload = function (file) {
-    $scope.user.id = Number($cookies.get('id'))
-     Upload.upload({
-       url: 'users/image/' + $scope.user.id,
-       method: 'PUT',
-       headers: { 'Content-Type': false },
-       fields: {
-         'user[profile_picture]': file
-       },
-       file: file,
-       sendFieldsAs: 'json'
-     }).then(function (resp) {
-       console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
-       $scope.user = resp.data.user
-     }, function (resp) {
-       console.log('Error status: ' + resp.status);
-     }, function (evt) {
-       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-       console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-     });
-   };
+
 }]);

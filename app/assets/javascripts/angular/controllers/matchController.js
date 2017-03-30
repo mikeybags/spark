@@ -40,7 +40,7 @@ app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$lo
         console.log(data.errors)
       }
       else{
-        $scope.user = data
+        $scope.user = data.user
       }
     })
   }

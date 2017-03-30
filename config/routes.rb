@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'users/:id/matches/rejected' => 'users#getRejectedMatches'
   get 'users/:id/sent_requests' => 'users#getSentMatches'
   post 'users/:id/reject' => 'users#createReject'
+  put 'users/moreimages/:id' => 'users#moreImages'
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

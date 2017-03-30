@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170330143417) do
-=======
-ActiveRecord::Schema.define(version: 20170330061548) do
->>>>>>> be8f4f5eca2aa49542a92dafea0eaa89d6273be2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,15 +112,9 @@ ActiveRecord::Schema.define(version: 20170330061548) do
     t.string   "salary"
     t.text     "bio"
     t.string   "profile_picture"
-<<<<<<< HEAD
-    t.integer  "zipcode"
+    t.string   "zipcode"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-=======
-    t.string   "zipcode"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
->>>>>>> be8f4f5eca2aa49542a92dafea0eaa89d6273be2
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"

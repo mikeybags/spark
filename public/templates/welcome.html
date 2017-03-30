@@ -7,15 +7,7 @@
           <h4 class="panel-title">My Profile</h4>
         </div>
         <div class="panel-body">
-          Viewed {{user.profiel_viewed}} Times.
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">Matches</h4>
-        </div>
-        <div class="panel-body">
-          <span class="glyphicon glyphicon-ok"></span> View Matches
+          Viewed {{user.profile_viewed}} Times.
         </div>
       </div>
       <div class="panel panel-default">
@@ -23,33 +15,13 @@
           <h4 class="panel-title">Messages</h4>
         </div>
         <div class="panel-body">
-          <span class="glyphicon glyphicon-envelope"></span> Email
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">Interests</h4>
-        </div>
-        <div class="panel-body">
-          <span class="glyphicon glyphicon-eye-open"></span> Viewed Me
-        </div>
-        <div class="panel-body">
-          <img class="wink" ng-src="assets/wink.png" alt=""> Winks
-        </div>
-        <div class="panel-body">
-          <span class="glyphicon glyphicon-star"></span> Favorites
-        </div>
-        <div class="panel-body">
-          <span class="glyphicon glyphicon-thumbs-up"></span> Likes
-        </div>
-        <div class="panel-body">
-          <span class="glyphicon glyphicon-book"></span> Phonebook
+          <span class="glyphicon glyphicon-envelope"></span> <a ng-href="#!/messages">View Messages</a>
         </div>
       </div>
     </div>
-    <a ng-click="messaging(1)">Curtis</a>
-    <a ng-click="messaging(4)">Mike</a>
+    <!-- <a ng-click="messaging(1)">Curtis</a>
+    <a ng-click="messaging(4)">Mike</a> -->
     <div id="main-content" class="col-sm-9">
-      <a ng-click="messaging(2)">Mick</a>
+
     </div>
   </div>

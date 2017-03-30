@@ -19,7 +19,7 @@ app.config(function ($routeProvider) {
   })
   .when('/home', {
     templateUrl: "../templates/welcome.html",
-    controller: "userController"
+    controller: "matchController"
   })
   .when('/users/:id', {
     templateUrl: "../templates/profile.html",

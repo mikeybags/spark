@@ -22,4 +22,16 @@ app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$lo
   }
   $scope.getMatches()
   $scope.getPendingMatches()
+
+  $scope.showUser = function() {
+    userFactory.showUser($cookies.get('id'), function(data){
+      if(data.errors){
+        console.log(data.errors)
+      }
+      else{
+        $scope.user = data
+      }
+    })
+  }
+  $scope.showUser();
 }])

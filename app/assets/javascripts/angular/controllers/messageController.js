@@ -30,7 +30,7 @@ app.controller('messageController', ['$scope', 'matchFactory', '$location', '$co
     })
   }
 
-  $interval(callAtInterval, 5000);
+  $interval(callAtInterval, 3000);
   function callAtInterval() {
       if($scope.messaging_user.id){
         $scope.message_user($scope.messaging_user.id)

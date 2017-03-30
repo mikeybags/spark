@@ -2,11 +2,13 @@ require 'fileutils'
 
 class UsersController < ApplicationController
   def show
+    puts params[:id]
+    puts cookies.signed[:user_id]
     user = User.find(params[:id])
-    puts user
-    puts user.profile_viewed
-    user.profile_viewed += 1
-    user.save
+    if user.id != cookies.signed[:user_id]
+      user.profile_viewed += 1
+      user.save
+    end
     if user
       render json: user
     else

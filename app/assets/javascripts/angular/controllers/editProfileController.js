@@ -1,4 +1,8 @@
 app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$location', '$cookies','Upload', "$routeParams", function($scope, $http, userFactory, $location, $cookies, Upload, $routeParams){
+  if (!$cookies.get("id")){
+    $location.url('/')
+  }
+  else {
   if ($cookies.get("id") != $routeParams.id){
     $location.url('/users/' + $routeParams.id)
   }
@@ -475,4 +479,5 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
        }
      })
    }
+ }
 }]);

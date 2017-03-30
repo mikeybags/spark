@@ -1,10 +1,9 @@
 app.controller('userController', ['$scope', 'userFactory', '$location', '$cookies','Upload', "$routeParams", function($scope, userFactory, $location, $cookies, Upload, $routeParams){
-console.log($cookies.get('id'))
-if($cookies.get('id')){
-  $scope.view = 4
-}else{
-  $scope.view = 0
-}
+    if($cookies.get('id')){
+      $scope.view = 4
+    }else{
+      $scope.view = 0
+    }
 
 $scope.user = {body_type: "No Answer", religion: "No Answer", feet: "-", inches: "-", relationship_status: "Never Married", have_children: "False", want_children: "No Answer", number_children: '0', salary:
 'No Answer', smoker: 'No Answer', drinker: 'No Answer', education_level: 'No Answer'}
@@ -127,5 +126,4 @@ $scope.createUser = function(){
       console.log(data)
     })
   }
-
 }])

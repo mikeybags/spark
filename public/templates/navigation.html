@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#!"><span class="glyphicon glyphicon-flash"></span>Spark<span class="glyphicon glyphicon-flash"></span></a>
+      <a class="navbar-brand" href="#!/home"><img id="logo" src="/images/logo3.png" alt="Spark"></a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
         <ul ng-if="current_user" class="nav navbar-nav navbar-right">
@@ -20,13 +20,13 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches<span class="caret"></span></a>
+            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="header">Matches<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a ng-href="#!">Daily Matches</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Interests<span class="caret"></span></a>
+            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="header">Interests<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a ng-href="#!">All Connections</a></li>
               <li><a ng-href="#!">Winks</a></li>
@@ -38,13 +38,13 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
+            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="header">Messages<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a ng-href="#!/messages">Messages</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a class="user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+            <a class="user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="header">Events</a>
           </li>
           <li class="dropdown">
             <a id="picture-dropdown" class="dropdown-toggle user-picture-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="sm-user-img" ng-src="{{current_user.profile_picture}}"><span class="caret"></span></a>

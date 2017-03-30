@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'messages' => 'messages#show'
   post 'users/messaging/:id' => 'users#messaging'
   post 'messages/create' => 'messages#create'
-  post 'messages/:id' => 'messages#show'
+  get 'messages' => 'messages#show'
   post 'matches/:id' => 'matches#show'
   post 'users/:id/matches' => 'users#createMatch'
   get 'users/:id/matches' => 'users#getMatches'

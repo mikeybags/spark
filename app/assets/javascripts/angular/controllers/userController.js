@@ -121,4 +121,10 @@ $scope.createUser = function(){
     $scope.errors = {}
   }
 
+  $scope.messaging = function(number){
+    userFactory.messaging(number, function(data){
+      console.log(data)
+    })
+  }
+
 }])

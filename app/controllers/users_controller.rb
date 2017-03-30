@@ -90,10 +90,18 @@ class UsersController < ApplicationController
     puts 'working'
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user
+      cookies.signed[:user_id] = user.id
+      session[:id] = user.id
       render json: {user: user}
     else
       render json: {errors: 'user does not exist'}
     end
+  end
+
+  def messaging
+    puts params[:id]
+    session[:message_id] = params[:id]
+    redirect_to '/'
   end
 
   def getCurrent

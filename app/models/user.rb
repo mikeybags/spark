@@ -16,4 +16,15 @@ class User < ApplicationRecord
    has_many :matches
    has_many :messages
    has_many :favorites
+   has_many :sent_requests_pending,-> { where accepted: false }, class_name: "Match", foreign_key: "requester_id"
+   has_many :pending_sent_users, class_name: "User", through: "sent_requests_pending", source: "acceptor"
+
+   has_many :sent_requests_accepted, -> { where accepted:  true }, class_name: "Match", foreign_key: "requester_id"
+   has_many :accepted_sent_users, class_name: "User", through: "sent_requests_accepted", source: "acceptor"
+
+   has_many :received_requests_pending,-> { where accepted: false }, class_name: "Match", foreign_key: "requester_id"
+   has_many :pending_received_users, class_name: "User", through: "received_requests_pending", source: "acceptor"
+
+   has_many :received_requests_accepted, -> { where accepted:  true }, class_name: "Match", foreign_key: "requester_id"
+   has_many :accepted_received_users, class_name: "User", through: "received_requests_accepted", source: "acceptor"
 end

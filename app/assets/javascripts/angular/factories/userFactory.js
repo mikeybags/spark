@@ -53,5 +53,10 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
       callback(data.data)
     })
   }
+  factory.messaging = function(id, callback){
+    $http.post('/users/messaging/'+id).then(function(data){
+      callback(data.data)
+    })
+  }
   return factory
 }])

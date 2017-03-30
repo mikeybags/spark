@@ -1,0 +1,3 @@
+<div class="messages <% if message.sender_id == session[:id]%> sender <% else %> receiver <% end %>">
+  <p><%= message.message %></p>
+</div>

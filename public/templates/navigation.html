@@ -40,7 +40,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a ng-href="#!">Email</a></li>
+              <li><a ng-href="#!/messages">Messages</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -59,6 +59,9 @@
               <li><a href="#!">Settings</a></li>
               <li><a ng-click="logout()">Log Out</a></li>
             </ul>
+          </li>
+          <li>
+            <a href="#!">Chat</a>
           </li>
         </ul>
         <ul ng-if="!current_user" class="nav navbar-nav navbar-right">

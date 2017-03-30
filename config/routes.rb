@@ -12,5 +12,12 @@ Rails.application.routes.draw do
   get 'users/zipcode' => 'users#zipcode'
   get 'users/:id' => 'users#show'
   get 'messages' => 'messages#show'
+  post 'users/messaging/:id' => 'users#messaging'
+  post 'messages/create' => 'messages#create'
+  post 'messages/:id' => 'messages#show'
+  post 'matches/:id' => 'matches#show'
+
+
+  mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

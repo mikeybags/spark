@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328214310) do
+ActiveRecord::Schema.define(version: 20170329134813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,13 +41,11 @@ ActiveRecord::Schema.define(version: 20170328214310) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "match_id"
     t.text     "message"
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["match_id"], name: "index_messages_on_match_id", using: :btree
     t.index ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
     t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end

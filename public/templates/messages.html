@@ -1,0 +1,65 @@
+
+  <div class="match_box col-lg-3">
+    <h1>Your Matches</h1>
+    <hr>
+    <div ng-repeat="user in matches">
+      <div class="profile_picture">
+
+      </div>
+      <div class="message_username">
+        <h4> {{user.username}}</h4>
+        <button ng-click="message_user(user.id)">Message</button>
+      </div>
+    </div>
+  </div>
+  <div class="message_box col-lg-9">
+    <div>
+      <h1 ng-if="messenger==false"> Select a match to message</h1>
+      <h1>{{messaging_user.username}}</h1>
+    </div>
+    <hr>
+    <div class="messaging_block">
+      <div class="each_message" ng-repeat="message in messages"><p class="receiving_message2" ng-if="message.receiver_id == user_id">{{message.message}}</p><p class="sending_message2" ng-if="message.sender_id == user_id">{{message.message}}</p></div>
+    </div>
+    <hr>
+    <div class="messaging_div">
+      <form ng-submit="sendMessage(messaging_user.id)" method="post">
+        <textarea ng-model="message.content" rows="10" placeholder="Send a message" class="form-control" cols="60"></textarea>
+        <input type="submit" class="btn pull-right" value="Send Message">
+      </form>
+    </div>
+  </div>
+
+
+<style media="screen">
+  .sending_message{
+    color: blue;
+  }
+  .match_box{
+    height: auto;
+    overflow: scroll;
+  }
+  .message_box{
+    height: auto;
+  }
+  .profile_picture{
+    height: 70px;
+    width: 70px;
+    background-color: blue;
+    display: inline-block;
+  }
+  .message_username{
+    display: inline-block;
+    vertical-align: top;
+  }
+  .messaging_block{
+    height: 400px;
+  }
+  .each_message{
+  }
+  .sending_message2{
+    text-align: right;
+  }
+  .receiving_message2{
+  }
+</style>

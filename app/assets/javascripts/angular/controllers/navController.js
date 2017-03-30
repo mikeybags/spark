@@ -15,7 +15,7 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
       $scope.current_user = data
     }
   })
-  
+
   $scope.logout = function(){
     $scope.currentUser = {};
     $cookies.remove("id");

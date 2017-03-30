@@ -11,8 +11,15 @@ class UsersController < ApplicationController
       user.profile_viewed += 1
       user.save
     end
+    match = Match.where("requester_id = ? OR acceptor_id = ?", params[:id], params[:id])
+    match = match.where("requester_id = ? OR acceptor_id = ?", cookies.signed[:user_id], cookies.signed[:user_id])
+    if match.length > 0
+      match = match[0]
+    else
+      match = false
+    end
     if user && preferences
-      render json: {user: user, preferences: preferences, images: images}
+      render json: {user: user, preferences: preferences, match: match, images: images}
     else
       render json: {errors: user.errors.full_messages}
     end

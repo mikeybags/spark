@@ -2,8 +2,57 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-* {
-  font-family: helvetica;
+#everything {
+  h1, h2, h3, h4, h5, h6, legend {
+    font-family: 'Slabo 27px', serif;
+  }
+
+  p, input, option, li, ul {
+    font-family: 'Lato', sans-serif;
+    color: #000000;
+  }
+
+  .jumbotron {
+    background-image: url('/images/heart.jpg');
+    background-size: 1700px 1000px;
+    background-position: 52% 70%;
+    height:800px;
+  }
+
+  .jumbo-wrapper {
+    background: grey;
+    opacity: 0.5;
+    filter: alpha(opacity=60);
+    z-index: 1
+  }
+
+  #mini-wrapper {
+    opacity: 1;
+    color: black;
+    z-index: 2
+  }
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 0px;
+  width: auto;
+}
+
+#main-nav {
+    font-family: 'Slabo 27px', serif;
+  }
+
+.lato {
+    font-family: 'Lato', sans-serif;
+  }
+
+.tag-line {
+  margin: 2em;
+  font-size: 1.5em
 }
 
 body {

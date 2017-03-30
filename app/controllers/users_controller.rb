@@ -2,20 +2,13 @@ require 'fileutils'
 
 class UsersController < ApplicationController
   def show
-    puts params[:id]
-    puts cookies.signed[:user_id]
     user = User.find(params[:id])
     preferences = Preference.find_by_user_id(params[:id])
-    if user.id != cookies.signed[:user_id]
-      user.profile_viewed += 1
-      user.save
-    end
     if user && preferences
       render json: {user: user, preferences: preferences}
     else
       render json: {errors: user.errors.full_messages}
     end
-
   end
 
   def new
@@ -29,44 +22,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def traits
-    puts "check"
-    user = User.update(params[:id], height: params[:height], body_type: params[:body_type], religion: params[:religion], gender: params[:gender])
-    if user.valid?
-      render json: {user: user}
-    else
-      render json: {errors: user.errors.full_messages}
-    end
-  end
-
-  def relationship
-    puts params
+  def profile
     if params[:have_children] == 'false'
       @have_children = false
     else
       @have_children = true
     end
-    user = User.update(params[:id], relationship_status: params[:relationship_status], have_children: @have_children, want_children: params[:want_children], number_children: params[:number_children])
-    if user.valid?
-      puts 'working'
-      render json: {user: user}
-    else
-      puts 'not working'
-      render json: {errors: user.errors.full_messages}
-    end
-  end
-
-  def attributes
-    user = User.update(params[:id], ethnicity: params[:ethnicity], smoker: params[:smoker], drinker: params[:drinker], education_level: params[:education_level], salary: params[:salary])
-    if user.valid?
-      render json: {user: user}
-    else
-      render json: {errors: user.errors.full_messages}
-    end
-  end
-
-  def bio
-    user = User.update(params[:id], bio: params[:bio])
+    user = User.update(params[:id], height: params[:height], body_type: params[:body_type], religion: params[:religion], gender: params[:gender],relationship_status: params[:relationship_status], have_children: @have_children, want_children: params[:want_children], number_children: params[:number_children], ethnicity: params[:ethnicity], smoker: params[:smoker], drinker: params[:drinker], education_level: params[:education_level], salary: params[:salary], bio: params[:bio])
     if user.valid?
       render json: {user: user}
     else
@@ -106,9 +68,6 @@ class UsersController < ApplicationController
       match = already_exists[0]
       if match.accepted == false
         match.accepted = true
-        if match.rejected = true
-          match.rejected = false
-        end
         match.save
         render json: {"saved" => true}
       else
@@ -143,7 +102,7 @@ class UsersController < ApplicationController
   def getPendingMatches
     user = User.includes(:preference).find(params[:id])
     pref = user.preference
-    matches = user.pending_received_users.includes(:preference).where("rejected = false")
+    matches = user.pending_received_users.includes(:preference)
     matches = compatability_test(user, matches, pref)
     render json: matches
   end
@@ -252,37 +211,12 @@ class UsersController < ApplicationController
   end
 
   def login
-    puts 'working'
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user
-      cookies.signed[:user_id] = user.id
-      session[:id] = user.id
       render json: {user: user}
     else
       render json: {errors: 'Combination does not exist'}
     end
-  end
-
-  def createReject
-    match = Match.where("acceptor_id = #{params[:id]} AND requester_id = #{params[:requester]}")
-    match = match[0]
-    match.rejected = true
-    match.save
-    render json: match
-  end
-
-  def getRejectedMatches
-    user = User.includes(:preference).find(params[:id])
-    pref = user.preference
-    matches = user.pending_received_users.includes(:preference).where("rejected = true")
-    matches = compatability_test(user, matches, pref)
-    render json: matches
-  end
-
-  def messaging
-    puts params[:id]
-    session[:message_id] = params[:id]
-    redirect_to '/'
   end
 
   def getCurrent
@@ -304,6 +238,7 @@ class UsersController < ApplicationController
       render json: {errors: user.errors.full_messages}
     end
   end
+
   private
     def user_params
       params.require(:user).permit(:profile_picture)

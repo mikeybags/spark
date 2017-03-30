@@ -10,41 +10,15 @@
       <a class="navbar-brand" href="#!"><span class="glyphicon glyphicon-flash"></span>Spark<span class="glyphicon glyphicon-flash"></span></a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-        <ul ng-if="current_user" class="nav navbar-nav navbar-right">
+        <ul ng-if="signed_in" class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Discover<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ng-href="#!/discover">Go Search</a></li>
-              <li><a ng-href="#!">Mutual Match</a></li>
-              <li><a ng-href="#!">Reverse Match</a></li>
-            </ul>
+            <a class="dropdown-toggle user-dropdown" ng-href="#!/discover" role="button" aria-haspopup="true" aria-expanded="false">Discover</a>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matches<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ng-href="#!">Daily Matches</a></li>
-            </ul>
+            <a class="dropdown-toggle user-dropdown" ng-href="#!/home">Matches</a>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Interests<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ng-href="#!">All Connections</a></li>
-              <li><a ng-href="#!">Winks</a></li>
-              <li><a ng-href="#!">Likes</a></li>
-              <li><a ng-href="#!">Who's Viewed Me</a></li>
-              <li><a ng-href="#!">Who's Favorited Me</a></li>
-              <li><a ng-href="#!">My Favorites</a></li>
-              <li><a ng-href="#!">Phonebook</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a ng-href="#!/messages">Messages</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a class="user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
+            <a class="dropdown-toggle user-dropdown" ng-href="#!/messages">Messages</a>
           </li>
           <li class="dropdown">
             <a id="picture-dropdown" class="dropdown-toggle user-picture-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="sm-user-img" ng-src="{{current_user.profile_picture}}"><span class="caret"></span></a>
@@ -55,17 +29,14 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
+            <a id="settings" class="dropdown-toggle user-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#!">Settings</a></li>
               <li><a ng-click="logout()">Log Out</a></li>
             </ul>
           </li>
-          <li>
-            <a href="#!">Chat</a>
-          </li>
         </ul>
-        <ul ng-if="!current_user" class="nav navbar-nav navbar-right">
+        <ul ng-if="!signed_in" class="nav navbar-nav navbar-right">
           <li><a id="nav-login-button" ng-href="#!/login"><button id="sign_in" ng-click="sign_in()">Sign In</button></a></li>
           <li><span class="nav-span">or</span></li>
           <li><a id="nav-register-button" ng-href="#!/register" ng-click="register()"><button id="create_account">Create Account</button></a></li>

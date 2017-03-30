@@ -1,7 +1,7 @@
-app.controller('userController', ['$scope', 'userFactory', '$location', '$cookies','Upload', "$routeParams", function($scope, userFactory, $location, $cookies, Upload, $routeParams){
+app.controller('userController', ['$scope', 'userFactory', '$location', '$cookies','Upload', "$routeParams", "$rootScope", function($scope, userFactory, $location, $cookies, Upload, $routeParams, $rootScope){
 console.log($cookies.get('id'))
 if($cookies.get('id')){
-  $scope.view = 4
+  $location.url('/home')
 }else{
   $scope.view = 0
 }
@@ -22,74 +22,47 @@ $scope.createUser = function(){
         $cookies.put('view', 1)
         console.log($cookies.get('view'))
         $scope.view = 1
+        $rootScope.signed_in = true
+        $rootScope.current_user = data
+        console.log($rootScope.current_user);
         }
       })
     }
   }
-  $scope.updateTraits = function(){
+
+  $scope.updateProfile = function(){
     console.log($scope.user)
     $scope.user.id = Number($cookies.get('id'))
     $scope.user.height = (Number($scope.user.feet) * 12) + Number($scope.user.inches)
-    userFactory.updateTraits($scope.user, function(data){
+    $scope.user.number_children = Number($scope.user.number_children)
+    $scope.user.ethnicity = ''
+    for(key in $scope.user.race){
+      if($scope.user.race[key] == true){
+        if (key == 'a') {
+          $scope.user.ethnicity += "Asian, "
+        } else if (key == 'b') {
+          $scope.user.ethnicity += "Black/African Descent, "
+        } else if (key == 'c') {
+          $scope.user.ethnicity += "Latino, "
+        } else if (key == 'd') {
+          $scope.user.ethnicity += "White/Caucasian, "
+        }  else if (key == 'd') {
+          $scope.user.ethnicity += "Other, "
+        }
+      }
+    }
+    $scope.user.ethnicity = $scope.user.ethnicity.slice(0, -2);
+    userFactory.updateProfile($scope.user, function(data){
       if(data.errors){
         $scope.errors = data.errors
-      }
-      else{
-        $cookies.put('id', data.user.id)
+      }else {
         $scope.user = data.user
         $cookies.put('view', 2)
         $scope.view = 2
       }
     })
   }
-  $scope.updateRelationship = function(){
-    console.log($scope.user)
-    $scope.user.id = Number($cookies.get('id'))
-    $scope.user.number_children = Number($scope.user.number_children)
-    userFactory.updateRelationship($scope.user, function(data){
-      if(data.errors){
-        $scope.errors = data.errors
-      }else {
-        console.log('working')
-        $scope.user = data.user
-        $cookies.put('view', 3)
-        $scope.view = 3
-      }
-    })
-  }
-  $scope.updateMoreAttributes = function(){
-    $scope.user.id = Number($cookies.get('id'))
-    $scope.user.ethnicity = ''
-    for(key in $scope.user.race){
-      if($scope.user.race[key] == true){
-        $scope.user.ethnicity += key
-        $scope.user.ethnicity += ', '
-      }
-    }
-    $scope.user.ethnicity = $scope.user.ethnicity.slice(0, -2);
-    userFactory.updateMoreAttributes($scope.user, function(data){
-      if(data.errors){
-        $scope.errors = data.errors
-      }
-      else{
-        $scope.user = data.user
-        $cookies.put('view', 4)
-        $scope.view = 4
-      }
-    })
-  }
-  $scope.updateBio = function(){
-    $scope.user.id = Number($cookies.get('id'))
-    userFactory.updateBio($scope.user, function(data){
-      if(data.errors){
-        $scope.errors = data.errors
-      }else {
-        $scope.user = data.user
-        $cookies.put('view', 5)
-        $scope.view = 5
-      }
-    })
-  }
+
   $scope.upload = function (file) {
     $scope.user.id = Number($cookies.get('id'))
      Upload.upload({
@@ -111,6 +84,7 @@ $scope.createUser = function(){
        console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
      });
    };
+
   $scope.previousPage = function(){
     $scope.view -= 1
     $cookies.put('view', $scope.view)

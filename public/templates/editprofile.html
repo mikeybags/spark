@@ -11,8 +11,14 @@
     <h3>{{ user.username }}</h3>
     <uib-tabset active="active">
       <uib-tab index="0" heading="Your Profile">
-        <br>
+        <h3>Edit Your Profile</h3>
         <form ng-submit="updateProfile()">
+          <label for="gender">Gender</label>
+          <select ng-model="user.gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <br>
           <label for="relationship_status">Relationship:</label>
           <select ng-model="user.relationship_status">
             <option value="Never married">Never Married</option>
@@ -46,15 +52,15 @@
           </select>
           <br>
           <label for="ethnicity">Ethnicity:</label>
-          <input type="checkbox" ng-model="user.race.Asian"> Asian
-          <input type="checkbox" ng-model="user.race.Black"> Black / African Descent
-          <input type="checkbox" ng-model="user.race.Latino"> Latino
-          <input type="checkbox" ng-model="user.race.White"> White / Caucasian
-          <input type="checkbox" ng-model="user.race.Other"> Other
+          <input type="checkbox" ng-model="user.ethnicity.a"> Asian
+          <input type="checkbox" ng-model="user.ethnicity.b"> Black / African Descent
+          <input type="checkbox" ng-model="user.ethnicity.c"> Latino
+          <input type="checkbox" ng-model="user.ethnicity.d"> White / Caucasian
+          <input type="checkbox" ng-model="user.ethnicity.e"> Other
           <br>
           <label for="body_type">Body Type:</label>
           <select class="form-control" ng-model="user.body_type">
-            <option value="No Answer">No Answer</option>
+            <option value="No answer">No Answer</option>
             <option value="Slender">Slender</option>
             <option value="Athletic and toned">Athletic and Toned</option>
             <option value="Heavyset">Heavyset</option>
@@ -103,7 +109,7 @@
           <label for="salary">Salary: </label>
           <select ng-model="user.salary">
             <option value="No answer">No Answer</option>
-            <option value="Less than 25,000">less than $25,000</option>
+            <option value="Less than $25,000">Less than $25,000</option>
             <option value="$25,001 to $35,000">$25,001 to $35,000</option>
             <option value="$35,001 to $50,000">$35,001 to $50,000</option>
             <option value="$50,001 to $75,000">$50,001 to $75,000</option>
@@ -124,8 +130,8 @@
           <br>
           <label for="smoke">Smoke? </label>
           <select ng-model="user.smoker">
-            <option value="No answer">No Answer</option>
-            <option value="No way">No Way</option>
+            <option value="No answer">No answer</option>
+            <option value="No way">No way</option>
             <option value="Occasionally">Occasionally</option>
             <option value="Daily">Daily</option>
             <option value="Cigar aficionado">Cigar aficionado</option>
@@ -147,12 +153,12 @@
         </form>
       </uib-tab>
       <uib-tab index="1" heading="Your Preferences">
-        <br>
+        <h3>What are you looking for in a match?</h3>
         <form ng-submit="setPreferences()">
           <label for="gender">Gender: </label>
-          <input type="radio" name="gender" value="male" ng-model="prefs.gender">
+          <input type="radio" name="gender" value="Male" ng-model="prefs.gender">
           <label for="gender.male">Male</label>
-          <input type="radio" name="gender" value="female" ng-model="prefs.gender">
+          <input type="radio" name="gender" value="Female" ng-model="prefs.gender">
           <label for="gender.female">Female</label>
           <br>
           <label for="minimum_age">Minimum Age: {{ prefs.minimum_age }}</label>
@@ -174,8 +180,8 @@
           <br>
           <label for="have_children">Has Children?</label>
           <select ng-model="prefs.has_children">
-            <option value="false">No</option>
-            <option value="true">Yes</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
           </select>
           <br>
           <label for="smoke">Smoke? </label>

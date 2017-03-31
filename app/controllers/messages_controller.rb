@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_messages = Message.where("(sender_id = #{cookies.signed[:user_id]} or sender_id = #{params[:id]}) and (receiver_id = #{params[:id]} or receiver_id = #{cookies.signed[:user_id]})")
+    puts @user_messages
     render json: {message: @user_messages, user: @user}
   end
 

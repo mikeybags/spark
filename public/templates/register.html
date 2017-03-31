@@ -182,7 +182,7 @@
   <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
   <img id="profile_picture" ng-src="{{user.profile_picture}}" charset="utf-8">
   <br>
-  <a ng-href="nextPage()" class="btn btn-warning">Accept Default Picture</a>
+  <a ng-click="nextPage()" class="btn btn-warning">Accept Default Picture</a>
 </div>
 
 

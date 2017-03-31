@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'users/personality' => 'users#updatePersonality'
   post 'users/login' => 'users#login'
   get 'users/zipcode' => 'users#zipcode'
+  get 'users/interests' => 'users#getInterests'
+  post 'users/interests' => 'users#setInterests'
   get 'users/:id' => 'users#show'
   post 'messages/create' => 'messages#create'
   post 'messages/:id' => 'messages#show'

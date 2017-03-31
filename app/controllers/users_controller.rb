@@ -29,7 +29,8 @@ class UsersController < ApplicationController
     if user.valid?
       cookies.signed[:user_id] = user.id
       Preference.create(user:user)
-      render json: {user: user}
+      interests = Interest.all
+      render json: {user: user, interests: interests }
     else
       render json: {errors: user.errors.full_messages}
     end
@@ -276,6 +277,19 @@ class UsersController < ApplicationController
      matches = user.pending_received_users.includes(:preference).where("rejected = true")
      matches = compatability_test(user, matches, pref)
      render json: matches
+   end
+
+   def getInterests
+     interests = Interest.all
+     render json: interests
+   end
+
+   def setInterests
+     puts "Params are", params[:user[:interests]], params[:id]
+     params[:user[:interests]].each do |i|
+       UserInterest.create([{user:User.find(params[:user[:id]]), interest:Interest.find_by_interest(i)}])
+     end
+     render json: {"saved" => true}
    end
 
   private

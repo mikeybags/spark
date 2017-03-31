@@ -15,6 +15,17 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
     })
   }
 
+  factory.getInterests = function(callback) {
+    $http.get('users/interests').then(function(data){
+      callback(data.data)
+    })
+  }
+
+  factory.setInterests = function(user, callback) {
+    $http.post('users/interests', user).then(function(data){
+      callback(data.data)
+    })
+  }
   factory.createUser = function(user, callback){
     console.log(user)
     $http.post('/users/new', user).then(function(data){

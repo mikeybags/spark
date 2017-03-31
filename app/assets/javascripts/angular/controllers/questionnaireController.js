@@ -1,4 +1,4 @@
-app.controller('questionnaireController', ['$scope', 'userFactory', '$location', '$cookies', function($scope, userFactory, $location, $cookies ){
+app.controller('questionnaireController', ['$scope', 'userFactory', '$location', '$cookies', '$rootScope', function($scope, userFactory, $location, $cookies, $rootScope ){
   if (!$cookies.get("id")){
     $location.url('/')
   }

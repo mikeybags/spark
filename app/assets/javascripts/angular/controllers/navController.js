@@ -3,7 +3,7 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
   if($cookies.get('id')){
     $rootScope.current_user_id = $cookies.get('id')
     $rootScope.signed_in = true
-    userFactory.getUser($rootScope.current_user_id, function(data){
+    userFactory.getUser($cookies.get('id'), function(data){
       if(data.err){
         console.log(data.err)
       } else{
@@ -12,7 +12,6 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
     })
   }else{
     $rootScope.signed_in = false
-    $location.url('/login')
   }
 
 
@@ -30,10 +29,7 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
         console.log("Errors", $scope.errors)
       }
       else{
-        console.log("data is", data);
         $rootScope.signed_in = true
-        $rootScope.current_user = data
-        console.log("current user is", $rootScope.current_user);
         $cookies.put("id", data.user.id)
         $rootScope.current_user_id = $cookies.get('id')
         $location.url('/home')

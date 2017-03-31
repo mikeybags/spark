@@ -5,6 +5,29 @@ if($cookies.get('id')){
 }else{
   $scope.view = 0
   $scope.prefs = {}
+  $scope.interests= []
+  $scope.user_interests= {}
+}
+
+userFactory.getInterests(function (interests) {
+  $scope.interests = interests
+  console.log($scope.interests);
+  });
+
+$scope.setInterests = function(){
+  $scope.user.interests = []
+  for(key in $scope.user_interests){
+    $scope.user.interests.push(key)
+  }
+  console.log("USERRRRR", $scope.user)
+  userFactory.setInterests($scope.user, function(data){
+    if (data.errors) {
+      $scope.errors = data.errors
+    } else {
+      $cookies.put('view', 3)
+      $scope.view = 3
+    }
+  })
 }
 
 $scope.user = {body_type: "No Answer", religion: "No Answer", feet: "-", inches: "-", relationship_status: "Never Married", have_children: "False", want_children: "No Answer", number_children: '0', salary:
@@ -18,6 +41,7 @@ $scope.createUser = function(){
       if(data.errors){
         $scope.errors = data.errors
       }else{
+        console.log("returned data is", data)
         $cookies.put('id', data.user.id)
         $scope.user = data.user
         $cookies.put('view', 1)
@@ -74,7 +98,7 @@ $scope.createUser = function(){
      }).then(function (resp) {
        console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
        $scope.user = resp.data.user
-       $scope.view = 3
+       $scope.view = 4
      }, function (resp) {
        console.log('Error status: ' + resp.status);
      }, function (evt) {
@@ -322,9 +346,6 @@ $scope.createUser = function(){
         $scope.errors = data.errors
       }
       else{
-
-        $rootScope.signed_in = true
-        $rootScope.current_user = data.user
         $location.url('/questionnaire')
       }
     })

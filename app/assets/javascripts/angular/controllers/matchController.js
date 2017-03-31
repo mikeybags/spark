@@ -1,4 +1,4 @@
-app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$location', '$cookies', function($scope, matchFactory, userFactory, $location, $cookies ){
+app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$location', '$cookies', '$rootScope', function($scope, matchFactory, userFactory, $location, $cookies, $rootScope ){
   if (!$cookies.get("id")){
     $location.url('/')
   }
@@ -9,6 +9,14 @@ app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$lo
     $scope.propertyName = '-updated_at';
     $scope.matchPropertyName = 'username';
     $scope.page = true
+    $rootScope.signed_in = true
+    userFactory.getUser($cookies.get("id"), function(data){
+      if(data.err){
+        console.log(data.err)
+      } else{
+        $rootScope.current_user = data
+      }
+    });
     $scope.getMatches = function(){
       $scope.page = true
       matchFactory.getMatches($cookies.get("id"), function(data){

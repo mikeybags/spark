@@ -21,7 +21,7 @@
             <a class="dropdown-toggle user-dropdown" ng-href="#!/messages">Messages</a>
           </li>
           <li class="dropdown">
-            <a id="picture-dropdown" class="dropdown-toggle user-picture-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="sm-user-img" ng-src="{{current_user.profile_picture}}"><span class="caret"></span></a>
+            <a id="picture-dropdown" class="dropdown-toggle user-picture-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="sm-user-img" ng-src="{{current_user.profile_picture}}" err-src="/assets/default.jpeg"><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a ng-href="#!/users/{{ current_user.id }}">View Your Profile</a></li>
               <li><a ng-href="#!/users/{{ current_user.id }}/edit">Edit Your Profile</a></li>

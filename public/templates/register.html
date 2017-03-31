@@ -1,9 +1,8 @@
 
-
 <div ng-if="view == 0">
   <h1>User Registration</h1>
   <h3>Create Account</h3>
-  <h5>Page {{view + 1}} of 4</h5>
+  <h5>Page {{view + 1}} of 5</h5>
   <form class="form" ng-submit="createUser()">
     <label for="username">Profile Name: </label>
     <input type="text" class="form-control" name="username" ng-model="user.username">
@@ -24,7 +23,7 @@
 <div ng-if="view == 1">
   <h1>User Registration</h1>
   <h3>Set your profile</h3>
-  <h5>Page {{view + 1}} of 4</h5>
+  <h5>Page {{view + 1}} of 5</h5>
   <form ng-submit="updateProfile()">
     <label for="gender">Gender</label>
     <select ng-model="user.gender">
@@ -167,18 +166,31 @@
 
 <div ng-if="view == 2">
   <h1>User Registration</h1>
-  <h3>Set main profile picture</h3>
-  <h5>Page {{view + 1}} of 4</h5>
-  <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
-  <img id="profile_picture" ng-src="{{user.profile_picture}}" charset="utf-8">
-  <br>
-  <a ng-href="#!/questionnaire" class="btn btn-warning">Accept Default Picture</a>
+  <h3>Choose Your Interests</h3>
+  <h5>Page {{view + 1}} of 5</h5>
+  <br><br>
+  <form class="" ng-submit="setInterests()" method="post">
+    <div class="interest-list col-sm-4 col-md-3 col-xs-6" ng-repeat="interest in interests"><input type="checkbox" ng-model="user_interests[interest.interest]"> {{interest.interest }}</div>
+    <div class="col-xs-12"><br><input type="submit" value="Submit Interests"></div>
+  </form>
 </div>
 
 <div ng-if="view == 3">
   <h1>User Registration</h1>
+  <h3>Set main profile picture</h3>
+  <h5>Page {{view + 1}} of 5</h5>
+  <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
+  <img id="profile_picture" ng-src="{{user.profile_picture}}" charset="utf-8">
+  <br>
+  <a ng-href="nextPage()" class="btn btn-warning">Accept Default Picture</a>
+</div>
+
+
+
+<div ng-if="view == 4">
+  <h1>User Registration</h1>
   <h3>What are you looking for in a match?</h3>
-  <h5>Page {{view + 1}} of 4</h5>
+  <h5>Page {{view + 1}} of 5</h5>
   <form ng-submit="setPreferences()">
     <label for="gender">Gender: </label>
     <input type="radio" name="gender" value="Male" ng-model="prefs.gender">

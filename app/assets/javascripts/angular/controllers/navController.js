@@ -1,7 +1,7 @@
 
 app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", "$uibModal", "$rootScope", function($scope, userFactory, $location, $cookies, $uibModal, $rootScope){
   if($cookies.get('id')){
-    $scope.current_user_id = $cookies.get('id')
+    $rootScope.current_user_id = $cookies.get('id')
     $rootScope.signed_in = true
   }else{
     $rootScope.signed_in = false
@@ -17,7 +17,7 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
   })
 
   $scope.logout = function(){
-    $scope.currentUser = {};
+    $rootScope.currentUser = {};
     $cookies.remove("id");
     $rootScope.signed_in = false
     $location.url('/');
@@ -30,13 +30,13 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
       }
       else{
         $rootScope.signed_in = true
-        console.log($scope.current_user);
+        $rootScope.current_user = data
         $cookies.put("id", data.user.id)
+        $rootScope.current_user_id = $cookies.get('id')
         $location.url('/home')
       }
     })
   }
-
 
   $scope.sign_in = function(){
     $location.url('/login')

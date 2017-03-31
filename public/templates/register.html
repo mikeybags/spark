@@ -170,7 +170,7 @@
   <h3>Set main profile picture</h3>
   <h5>Page {{view + 1}} of 3</h5>
   <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
-  <img ng-src="{{user.profile_picture}}" charset="utf-8">
+  <img id="profile_picture" ng-src="{{user.profile_picture}}" charset="utf-8">
   <a ng-href="#!/questionnaire" class="btn btn-success">Proceed to Personality Test</a>
 </div>
 <ul ng-repeat="error in errors">

@@ -117,12 +117,9 @@ body {
   background-color: #427AA1
 }
 
-.navbar-nav > .dropdown > :focus {
-  color: #6DAEDB;
-  background-color: #FFFFFF
+#navbar > ul > li > .user-dropdown:focus {
+  background-color: #315976
 }
-
-
 
 .navbar-custom .navbar-nav > .active > a {
   background-color: #427AA1
@@ -212,7 +209,7 @@ background-color: #427AA1;
 #navbar > ul > li > #settings {
   padding: 15px 25px 15px 0px;
 }
-#navbar > ul > li > .user-picture-dropdown {
+#navbar > ul > li > #picture-dropdown {
   padding: 13px 25px 11px 25px;
 }
 
@@ -304,9 +301,13 @@ background-color: #427AA1;
     display: block;
     pointer-events: auto
   }
-  .navbar-nav > .dropdown > .dropdown-toggle:hover {
+  #navbar > ul > li > #settings {
     pointer-events: none;
   }
+  #navbar > ul > li > #picture-dropdown{
+    pointer-events: none;
+  }
+
 }
 
 
@@ -344,7 +345,7 @@ background-color: #427AA1;
   #navbar > ul > li > .user-dropdown {
     padding: 13px 15px 16px 15px;
   }
-  #navbar > ul > li > .user-picture-dropdown {
+  #navbar > ul > li > #picture-dropdown {
     padding: 13px 25px 11px 25px;
   }
 }

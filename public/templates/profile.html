@@ -3,7 +3,7 @@
     <br><br>
     <img id="profile_picture" class="img-responsive" ng-src="{{user.profile_picture}}" alt="Profile Picture">
     <br><br>
-    <a class="btn btn-block btn-primary" ng-if="already_matched" href="#!/messages">Message</a>
+    <a class="btn btn-block btn-primary" ng-if="already_matched" ng-click="sendAMessage(user.id)">Message</a>
     <button ng-if="matchable" class=" btn btn-danger btn-block disappear-button" ng-click="match(user.id)" type="button" name="button">Spark Up</span></button>
   </div>
   <div id="profile-content" class="col-sm-9">

@@ -100,4 +100,8 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
        });
      };
    }
+   $scope.sendAMessage = function(id){
+     $cookies.put('message_id', id)
+     $location.url('/messages')
+   }
 }]);

@@ -1,25 +1,25 @@
 
-app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", "$uibModal", "$rootScope", function($scope, userFactory, $location, $cookies, $uibModal, $rootScope){
+app.controller("navController", ["$scope", "userFactory", "$location", "$cookies", "$uibModal", "$rootScope", "$timeout", function($scope, userFactory, $location, $cookies, $uibModal, $rootScope, $timeout){
   if($cookies.get('id')){
     $rootScope.current_user_id = $cookies.get('id')
     $rootScope.signed_in = true
+    userFactory.getUser($rootScope.current_user_id, function(data){
+      if(data.err){
+        console.log(data.err)
+      } else{
+        $rootScope.current_user = data
+      }
+    })
   }else{
     $rootScope.signed_in = false
     $location.url('/login')
   }
 
-  userFactory.getUser($scope.current_user_id, function(data){
-    if(data.err){
-      console.log(data.err)
-    } else{
-      $rootScope.current_user = data
-    }
-  })
 
   $scope.logout = function(){
-    $rootScope.currentUser = {};
     $cookies.remove("id");
     $rootScope.signed_in = false
+    $rootScope.current_user = {}
     $location.url('/');
   }
 
@@ -33,7 +33,7 @@ app.controller("navController", ["$scope", "userFactory", "$location", "$cookies
         console.log("data is", data);
         $rootScope.signed_in = true
         $rootScope.current_user = data
-        console.log("current user", $rootScope.current_user);
+        console.log("current user is", $rootScope.current_user);
         $cookies.put("id", data.user.id)
         $rootScope.current_user_id = $cookies.get('id')
         $location.url('/home')

@@ -322,6 +322,8 @@ $scope.createUser = function(){
         $scope.errors = data.errors
       }
       else{
+
+        $rootScope.signed_in = true
         $rootScope.current_user = data.user
         $location.url('/questionnaire')
       }

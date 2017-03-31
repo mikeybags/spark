@@ -39,7 +39,7 @@
         <p ng-if="!user.drinker">Drink: No Answer</p>
         <h3>In their own words</h3>
         <hr>
-        <p ng-if="user.bio">{{ user.bio }}</p>
+        <p class="user-bio" ng-if="user.bio">{{ user.bio }}</p>
         <p ng-if="!user.bio">{{ user.username }} hasn't added a bio yet!</p>
       </uib-tab>
       <uib-tab index="1" heading="Photos">

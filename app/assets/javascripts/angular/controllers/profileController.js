@@ -6,11 +6,10 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
   $scope.profile_id = $routeParams.id
   $scope.feet = 0
   $scope.inches = 0
-  $scope.myInterval = 5000;
-  $scope.noWrapSlides = false;
   $scope.active = 0;
   $scope.already_matched = false
   $scope.matchable = false
+  $scope.slides = []
   $scope.showUser = function() {
     userFactory.showUser($scope.profile_id, function(data){
       if(data.err){
@@ -31,12 +30,23 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
         $scope.user = data.user
         $scope.preferences = data.preferences
         $scope.images = data.images
+        var x = 0
+        for(key in $scope.images){
+          $scope.images[key].id = x
+          $scope.slides.push($scope.images[key])
+          x += 1
+        }
+        console.log($scope.slides)
+        $scope.myInterval = 5000;
+        $scope.noWrapSlides = false;
+        $scope.active = 0;
         $scope.findLocation($scope.user)
         $scope.heightInFeet($scope.user.height)
       }
     })
   }
     $scope.showUser();
+
 
     $scope.calculateAge = function (birthday) {
       var birthDate = new Date(birthday)

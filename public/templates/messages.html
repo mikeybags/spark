@@ -27,7 +27,7 @@
     <div class="messaging_div">
       <form ng-submit="sendMessage(messaging_user.id)" method="post">
         <textarea ng-model="message.content" rows="10" placeholder="Send a message" class="form-control" cols="60"></textarea>
-        <input type="submit" class="btn pull-right" value="Send Message">
+        <input ng-if="messaging_user.id > 0" type="submit" class="btn pull-right" value="Send Message">
       </form>
     </div>
   </div>

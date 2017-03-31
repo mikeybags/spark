@@ -20,16 +20,7 @@
   }
 
   .jumbo-wrapper {
-    background: grey;
-    opacity: 0.5;
-    filter: alpha(opacity=60);
-    z-index: 1
-  }
-
-  #mini-wrapper {
-    opacity: 1;
-    color: black;
-    z-index: 2
+    background-color: rgba(136,136,136,0.5);
   }
 }
 

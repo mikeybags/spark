@@ -49,7 +49,6 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
     })
   }
   factory.login = function(user, callback){
-    console.log(user)
     $http.post('/users/login', user).then(function(data){
       callback(data.data)
     })

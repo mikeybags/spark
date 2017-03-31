@@ -500,44 +500,33 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
    }
 
    $scope.updateProfile = function() {
-
-     var race_arr = []
-     var race = ''
-     for (key in $scope.user.ethnicity) {
-       if(key == 'a' && $scope.user.ethnicity.a == true){
-         race = "Asian"
-         race_arr.push(race)
-       }
-       if(key == 'b' && $scope.user.ethnicity.b == true){
-         race = "Black/African Descent"
-         race_arr.push(race)
-       }
-       if(key == 'c' && $scope.user.ethnicity.c == true){
-         race = "Latino"
-         race_arr.push(race)
-       }
-       if(key == 'd' && $scope.user.ethnicity.d == true){
-         race = "White/Caucasian"
-         race_arr.push(race)
-       }
-       if(key == 'e' && $scope.user.ethnicity.e == true){
-         race = "Other"
-         race_arr.push(race)
+     $scope.user.races = ''
+     for(key in $scope.user.ethnicity){
+       if($scope.user.ethnicity[key] == true){
+         if (key == 'a') {
+           $scope.user.races += "Asian, "
+         } else if (key == 'b') {
+           $scope.user.races += "Black/African Descent, "
+         } else if (key == 'c') {
+           $scope.user.races += "Latino, "
+         } else if (key == 'd') {
+           $scope.user.races += "White/Caucasian, "
+         }  else if (key == 'd') {
+           $scope.user.races += "Other, "
+         }
        }
      }
-     $scope.prefs.ethnicity = race_arr
+     $scope.user.ethnicity = $scope.user.races
+     $scope.user.ethnicity = $scope.user.ethnicity.slice(0, -2);
      console.log($scope.user)
      $scope.user.id = Number($cookies.get('id'))
      $scope.user.height = (Number($scope.user.feet) * 12) + Number($scope.user.inches)
-     userFactory.updateTraits($scope.user, function(data){
+     userFactory.updateProfile($scope.user, function(data){
        if(data.errors){
          $scope.errors = data.errors
        }
        else{
-         $cookies.put('id', data.user.id)
-         $scope.user = data.user
-         $cookies.put('view', 2)
-         $scope.view = 2
+         $scope.showUser()
        }
      })
    }

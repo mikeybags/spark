@@ -1,7 +1,7 @@
 <div>
   <div id="profile-sidebar" class="col-sm-3 text-center">
     <br><br>
-    <img id="profile_picture" ng-src="{{user.profile_picture}}" alt="Profile Picture">
+    <img id="profile_picture" class="img-responsive" ng-src="{{user.profile_picture}}" alt="Profile Picture">
     <br><br>
     <label for="edit_picture">Edit Profile Picture</a>
     <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
@@ -79,7 +79,7 @@
           </select>
           <span class="height">Feet</span>
           <select ng-model="user.inches">
-            <option value="-">-</option>
+            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

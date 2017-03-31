@@ -2,7 +2,7 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
   if (!$cookies.get("id")){
     $location.url('/')
   }
-  else{
+  else {
   $scope.profile_id = $routeParams.id
   $scope.feet = 0
   $scope.inches = 0
@@ -82,6 +82,5 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
          console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
        });
      };
-   }
    }
 }]);

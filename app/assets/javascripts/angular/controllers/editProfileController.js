@@ -16,8 +16,7 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
       if(data.err){
         console.log(data.err)
       } else{
-        $scope.preferences = data.preferences
-        $scope.prefs = $scope.preferences
+        $scope.prefs = data.preferences
         $scope.heightInFeet($scope.prefs.maximum_height)
         $scope.prefs.max_feet = String($scope.feet)
         $scope.prefs.max_inches = String($scope.inches)
@@ -192,10 +191,25 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
 
 
         $scope.user = data.user
-        $scope.user.race = {}
+        console.log("User is", $scope.user);
         var races = $scope.user.ethnicity.split(", ")
+        $scope.user.ethnicity = {}
         for (race in races){
-          $scope.user.race[races[race]] = true
+          if (races[race] == 'Asian') {
+            $scope.user.ethnicity.a = true
+          }
+          if (races[race] == 'Black/African Descent') {
+            $scope.user.ethnicity.b = true
+          }
+          if (races[race] == 'Latino') {
+            $scope.user.ethnicity.c = true
+          }
+          if (races[race] == 'White/Caucasian') {
+            $scope.user.ethnicity.d = true
+          }
+          if (races[race] == 'Other') {
+            $scope.user.ethnicity.e = true
+          }
         }
         $scope.heightInFeet($scope.user.height)
         $scope.user.feet = String($scope.feet)
@@ -478,7 +492,7 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
          $scope.errors = data.errors
        }
        else{
-         $scope.preferences = data.preferences
+         $scope.prefs = data.preferences
          $scope.user = data.user
          $scope.showUser();
        }
@@ -486,6 +500,32 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
    }
 
    $scope.updateProfile = function() {
+
+     var race_arr = []
+     var race = ''
+     for (key in $scope.user.ethnicity) {
+       if(key == 'a' && $scope.user.ethnicity.a == true){
+         race = "Asian"
+         race_arr.push(race)
+       }
+       if(key == 'b' && $scope.user.ethnicity.b == true){
+         race = "Black/African Descent"
+         race_arr.push(race)
+       }
+       if(key == 'c' && $scope.user.ethnicity.c == true){
+         race = "Latino"
+         race_arr.push(race)
+       }
+       if(key == 'd' && $scope.user.ethnicity.d == true){
+         race = "White/Caucasian"
+         race_arr.push(race)
+       }
+       if(key == 'e' && $scope.user.ethnicity.e == true){
+         race = "Other"
+         race_arr.push(race)
+       }
+     }
+     $scope.prefs.ethnicity = race_arr
      console.log($scope.user)
      $scope.user.id = Number($cookies.get('id'))
      $scope.user.height = (Number($scope.user.feet) * 12) + Number($scope.user.inches)

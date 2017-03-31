@@ -21,9 +21,9 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
       callback(data.data)
     })
   }
-  factory.updateTraits = function(user, callback){
+  factory.updateProfile = function(user, callback){
     console.log(user)
-    $http.post('/users/traits', user).then(function(data){
+    $http.post('/users/profile', user).then(function(data){
       callback(data.data)
     })
   }

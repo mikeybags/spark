@@ -9,7 +9,7 @@
   <div id="profile-content" class="col-sm-9">
     <br>
     <h3>{{ user.username }}</h3>
-    <h5>{{ calculateAge(user.birthday) }} year old {{ user.gender }} | {{ location.formatted_address }} | Seeking {{ preferences.gender }}s {{ preferences.minimum_age }} - {{ preferences.maximum_age }} within {{ preferences.distance }} </h5>
+    <h5>{{ calculateAge(user.birthday) }} year old {{ user.gender }} | {{ user.city }}, {{ user.state }} <span ng-if="preferences.gender && preferences.minimum_age && preferences.maximum_age">| Seeking {{ preferences.gender }}s {{ preferences.minimum_age }} - {{ preferences.maximum_age }} years old</span></h5>
     <uib-tabset active="active">
       <uib-tab index="0" heading="About">
         <h3>Details</h3>

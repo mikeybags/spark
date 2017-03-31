@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    puts params[:zipcode].length
     user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday], zipcode: params[:zipcode])
     if user.valid?
       cookies.signed[:user_id] = user.id

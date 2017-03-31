@@ -61,12 +61,12 @@ class UsersController < ApplicationController
     maximum_date = Time.now - (31536000 * pref.minimum_age)
     minimum_date = Time.now - (31536000 * pref.maximum_age)
     users = User.includes(:preference).where("gender = ? AND city = ? AND state = ?", pref.gender, current_user.city, current_user.state).where(:birthday => minimum_date.beginning_of_day..maximum_date.end_of_day).limit(8).offset(params[:start].to_i)
-    if current_user.want_children = "yes"
-      users = users.where(:want_children => ["yes", "maybe"])
-    elsif current_user.want_children = "no"
-      users = users.where(:want_children => ["no", "maybe"])
+    if current_user.want_children = "Yes"
+      users = users.where(:want_children => ["Yes", "Maybe"])
+    elsif current_user.want_children = "No"
+      users = users.where(:want_children => ["No", "Maybe"])
     end
-    if pref.has_children = "no"
+    if pref.has_children = "Nso"
       users = users.where(have_children:false)
     end
     users = compatability_test(current_user, users, pref)
@@ -81,6 +81,9 @@ class UsersController < ApplicationController
       match = already_exists[0]
       if match.accepted == false
         match.accepted = true
+        if match.rejected = true
+          match.rejected = false
+        end
         match.save
         render json: {"saved" => true}
       else
@@ -115,7 +118,7 @@ class UsersController < ApplicationController
   def getPendingMatches
     user = User.includes(:preference).find(params[:id])
     pref = user.preference
-    matches = user.pending_received_users.includes(:preference)
+    matches = user.pending_received_users.includes(:preference).where("rejected = false")
     matches = compatability_test(user, matches, pref)
     render json: matches
   end
@@ -196,7 +199,7 @@ class UsersController < ApplicationController
         person.compatability += 5
         matched_on << "height"
       end
-      if pref.personalities.split(",").include?(person.personality)
+      if pref.personalities.include?(person.personality)
         person.compatability += 45
       end
       if matched_on.include?(pref.most_important)
@@ -258,6 +261,22 @@ class UsersController < ApplicationController
     image.update(image_params)
     render json: {image: image}
   end
+
+  def createReject
+     match = Match.where("acceptor_id = #{params[:id]} AND requester_id = #{params[:requester]}")
+     match = match[0]
+     match.rejected = true
+     match.save
+     render json: match
+   end
+
+   def getRejectedMatches
+     user = User.includes(:preference).find(params[:id])
+     pref = user.preference
+     matches = user.pending_received_users.includes(:preference).where("rejected = true")
+     matches = compatability_test(user, matches, pref)
+     render json: matches
+   end
 
   private
     def user_params

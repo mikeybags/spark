@@ -3,7 +3,7 @@ app.controller('questionnaireController', ['$scope', 'userFactory', '$location',
     $location.url('/')
   }
   else{
-    $scope.user = $cookies.get("user");
+    $scope.user = $cookies.get("id");
     $scope.view = 0;
     $scope.personality = {
       "E/I": 0,
@@ -132,7 +132,7 @@ app.controller('questionnaireController', ['$scope', 'userFactory', '$location',
       }
       $cookies.put("personality", $scope.result)
       $scope.view += 1;
-      userFactory.updatePersonality($scope.result, function(){
+      userFactory.updatePersonality($scope.result, $scope.user, function(){
       })
     }
     $scope.personality_descriptions = {

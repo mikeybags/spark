@@ -33,6 +33,7 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
           $scope.matchable = true
         }
         $scope.user = data.user
+        $scope.interests = data.interests
         $scope.preferences = data.preferences
         $scope.images = data.images
         var x = 0

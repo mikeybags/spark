@@ -33,10 +33,12 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
           $scope.matchable = true
         }
         $scope.user = data.user
+        $scope.interests = data.interests
         $scope.preferences = data.preferences
         $scope.images = data.images
         var x = 0
         for(key in $scope.images){
+          $scope.image_check = true
           $scope.images[key].id = x
           $scope.slides.push($scope.images[key])
           x += 1
@@ -97,5 +99,9 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
          console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
        });
      };
+   }
+   $scope.sendAMessage = function(id){
+     $cookies.put('message_id', id)
+     $location.url('/messages')
    }
 }]);

@@ -3,7 +3,7 @@
     <br><br>
     <img id="profile_picture" class="img-responsive" ng-src="{{user.profile_picture}}" alt="Profile Picture">
     <br><br>
-    <a class="btn btn-block btn-primary" ng-if="already_matched" href="#!/messages">Message</a>
+    <a class="btn btn-block btn-primary" ng-if="already_matched" ng-click="sendAMessage(user.id)">Message</a>
     <button ng-if="matchable" class=" btn btn-danger btn-block disappear-button" ng-click="match(user.id)" type="button" name="button">Spark Up</span></button>
   </div>
   <div id="profile-content" class="col-sm-9">
@@ -37,12 +37,22 @@
         <p ng-if="!user.smoker">Smoke: No Answer</p>
         <p ng-if="user.drinker">Drink: {{ user.drinker }}</p>
         <p ng-if="!user.drinker">Drink: No Answer</p>
+        <p ng-if="user.personality">Personality Type: {{user.personality}}</p>
         <h3>In their own words</h3>
         <hr>
         <p class="user-bio" ng-if="user.bio">{{ user.bio }}</p>
         <p ng-if="!user.bio">{{ user.username }} hasn't added a bio yet!</p>
+        <h3>Interests</h3>
+        <hr>
+        <div ng-if="interests">
+          <ul ng-repeat="interest in interests">
+            <li>{{interest.interest}}</li>
+          </ul>
+        </div>
+        <p ng-if="!interests">{{ user.username }} has no interests!</p>
       </uib-tab>
       <uib-tab index="1" heading="Photos">
+        <h2 ng-if="image_check != true">They currently have no photos. Ask them for 1 ;)</h2>
         <div>
         <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
           <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
@@ -50,9 +60,6 @@
           </div>
         </div>
       </div>
-      </uib-tab>
-      <uib-tab index="2" heading="Our History">
-        History will go here
       </uib-tab>
     </uib-tabset>
   </div>

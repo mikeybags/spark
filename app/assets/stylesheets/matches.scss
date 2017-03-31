@@ -22,6 +22,62 @@
   .jumbo-wrapper {
     background-color: rgba(136,136,136,0.5);
   }
+  .big-option {
+      transform: scale(2);
+      margin-left: 10px;
+      margin-right: 10px;
+  }
+  .med-option {
+      transform: scale(1.5);
+      margin-left: 8px;
+      margin-right: 8px;
+  }
+  .small-option {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .option {
+    display: inline-block;
+  }
+  .option-name{
+    display: inline-block;
+    vertical-align: center
+  }
+
+  .big-option {
+      transform: scale(2);
+  }
+  #white-text {
+    color: white
+  }
+}
+
+.discover_person {
+  border:6px solid #CFCFEA;
+  background-color: #F2F6FB;
+  border-radius: 5px;
+  padding:2px;
+  margin:8px;
+  display:inline-block;
+  vertical-align:top
+}
+
+.discover_person img {
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+
+#filter{
+  position:fixed;
+  margin: 0 auto;
+  right: -80;
+  top:30;
+}
+
+#questionnaire .options {
+  margin: 0 auto;
+  width: 320px;
 }
 
 .navbar-brand {

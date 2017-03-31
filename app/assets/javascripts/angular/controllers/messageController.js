@@ -13,6 +13,10 @@ app.controller('messageController', ['$scope', 'matchFactory', '$location', '$co
           console.log(data)
         }else {
           $scope.matches = data.matches
+          if ($cookies.get('message_id')) {
+            $scope.message_user($cookies.get('message_id'))
+            $cookies.remove('message_id')
+          }
         }
       })
     }

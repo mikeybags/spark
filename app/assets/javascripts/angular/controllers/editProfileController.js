@@ -1,4 +1,4 @@
-app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$location', '$cookies','Upload', "$routeParams", function($scope, $http, userFactory, $location, $cookies, Upload, $routeParams){
+app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$location', '$cookies','Upload', "$routeParams","$route", function($scope, $http, userFactory, $location, $cookies, Upload, $routeParams,$route){
   if (!$cookies.get("id")){
     $location.url('/')
   }
@@ -10,7 +10,7 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
   $scope.profile_id = $routeParams.id
   $scope.feet = 0
   $scope.inches = 0
-
+  $scope.success_message = false;
   $scope.showUser = function() {
     userFactory.showUser($scope.profile_id, function(data){
       if(data.err){
@@ -262,6 +262,8 @@ app.controller('editProfileController', ['$scope', '$http', 'userFactory', '$loc
       }).then(function (resp) {
         console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
         $scope.user = resp.data.user
+        $scope.success_message = true
+        $route.reload();
       }, function (resp) {
         console.log('Error status: ' + resp.status);
       }, function (evt) {

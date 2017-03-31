@@ -285,9 +285,9 @@ class UsersController < ApplicationController
    end
 
    def setInterests
-     puts "Params are", params[:user[:interests]], params[:id]
-     params[:user[:interests]].each do |i|
-       UserInterest.create([{user:User.find(params[:user[:id]]), interest:Interest.find_by_interest(i)}])
+     puts "Params are", params[:interests], params[:id]
+     params[:interests].each do |i|
+       UserInterest.create([{user:User.find(params[:id]), interest:Interest.find_by_interest(i)}])
      end
      render json: {"saved" => true}
    end

@@ -40,6 +40,6 @@ class User < ApplicationRecord
    end
 
    def set_default_url_on_category
-    "/images/:style/#{rand(1..25).to_s}.jpg"
+    "/images/:style/#{(username[0].upcase.ord - 64).to_s}.jpg"
   end
 end

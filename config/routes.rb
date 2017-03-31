@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'messages' => 'messages#show'
   post 'users/messaging/:id' => 'users#messaging'
   post 'messages/create' => 'messages#create'
-  post 'messages/:id' => 'messages#show'
+  get 'messages' => 'messages#show'
   post 'matches/:id' => 'matches#show'
   post 'users/:id/matches' => 'users#createMatch'
   get 'users/:id/matches' => 'users#getMatches'
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'users/:id/matches/rejected' => 'users#getRejectedMatches'
   get 'users/:id/sent_requests' => 'users#getSentMatches'
   post 'users/:id/reject' => 'users#createReject'
+  put 'users/moreimages/:id' => 'users#moreImages'
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

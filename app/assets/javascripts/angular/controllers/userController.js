@@ -101,5 +101,4 @@ $scope.createUser = function(){
       console.log(data)
     })
   }
-
 }])

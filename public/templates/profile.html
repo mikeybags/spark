@@ -3,7 +3,8 @@
     <br><br>
     <img id="profile_picture" ng-src="{{user.profile_picture}}" alt="Profile Picture">
     <br><br>
-    <a class="btn btn-block btn-primary" href="">Send Message</a>
+    <a class="btn btn-block btn-primary" ng-if="already_matched" href="#!/messages">Message</a>
+    <button ng-if="matchable" class=" btn btn-danger btn-block disappear-button" ng-click="match(user.id)" type="button" name="button">Spark Up</span></button>
   </div>
   <div id="profile-content" class="col-sm-9">
     <br>
@@ -42,7 +43,13 @@
         <p ng-if="!user.bio">{{ user.username }} hasn't added a bio yet!</p>
       </uib-tab>
       <uib-tab index="1" heading="Photos">
-        Photos will go here
+        <div style="height: 1000px, width: 300px">
+          <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+             <div uib-slide ng-repeat="image in images">
+               <img ng-src="{{image.image_path}}" style="margin:auto;">
+             </div>
+           </div>
+         </div>
       </uib-tab>
       <uib-tab index="2" heading="Our History">
         History will go here
@@ -51,3 +58,12 @@
   </div>
 
 </div>
+
+</style>
+
+<script type="text/javascript">
+  $(document).on("click", ".disappear-button", function(){
+    $(this).fadeOut()
+  })
+
+</script>

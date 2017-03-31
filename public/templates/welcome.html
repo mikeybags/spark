@@ -1,7 +1,7 @@
   <div class="col-md-12 row">
     <br>
     <br>
-    <div id="left-sidebar" class="col-sm-3">
+    <div id="left-sidebar" class="col-xs-3">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">My Profile</h4>
@@ -18,10 +18,97 @@
           <span class="glyphicon glyphicon-envelope"></span> <a ng-href="#!/messages">View Messages</a>
         </div>
       </div>
+      <div >
+        <legend class="text-center">Filter Results</legend>
+        <select class="form-control" ng-model="propertyName">
+          <option ng-if="page" value="-matched_on" selected="selected">Newest Matches</option>
+          <option ng-if="page" value="matched_on" selected="selected">Oldest Matches</option>
+          <option ng-if="!page" value="-compatability" selected="selected">Compatability</option>
+          <option value="-birthday">Youngest First</option>
+          <option value="birthday">Oldest First</option>
+          <option value="username">Username</option>
+          <option value="-updated_at">Activity Date</option>
+        </select>
+      </div>
     </div>
     <!-- <a ng-click="messaging(1)">Curtis</a>
     <a ng-click="messaging(4)">Mike</a> -->
-    <div id="main-content" class="col-sm-9">
-
+    <div id="main-content" class="col-xs-9">
+      <uib-tabset active="active">
+        <uib-tab index="0" heading="Matches" ng-click="getMatches()">
+          <h1 class="text-center">All of Your Matches</h1>
+          <div class="discover_person" ng-repeat="person in matches | orderBy:propertyName">
+            <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+            <p class="text-center">{{person.username}}</p>
+            <p class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</p>
+            <p class="text-center">Matched: {{person.matched_on | date}}</p>
+            <div class="row">
+              <a uib-tooltip="View Profile" class="col-xs-4 col-xs-offset-1 btn btn-info" href="#!/users/{{person.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+              <a uib-tooltip="Message" class="col-xs-4 col-xs-offset-2 btn btn-primary match-button" href='#!/messages'><span class="glyphicon glyphicon-envelope"></span></a>
+            </div>
+          </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Pending Matches" ng-click="getPendingMatches()">
+          <h1 class="text-center">Look at everyone who wants you</h1>
+          <h3 class="text-center">Simply click Spark to match up</h3>
+          <div class="discover_person" ng-repeat="person in pending | orderBy:propertyName">
+            <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+            <p class="text-center">{{person.username}}</p>
+            <p class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</p>
+            <p class="text-center">{{person.compatability}}% Match</p>
+              <div class="btn-group match-button-group">
+                <button uib-tooltip="Reject" class="  btn btn-warning match-button" type="button" name="button" ng-click="reject(person.id)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                <a uib-tooltip="View Profile" class=" btn btn-info" href="#!/users/{{person.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                <button uib-tooltip="Match" class=" btn btn-success match-button" ng-click="match(person.id)" type="button" name="button"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+              </div>
+          </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Rejected Matches" ng-click="getRejectedMatches()">
+          <h1 class="text-center">You didn't want them before</h1>
+          <h3 class="text-center">But maybe you've changed your mind...?</h3>
+          <div class="discover_person" ng-repeat="person in rejected | orderBy:propertyName">
+            <img ng-src="{{person.profile_picture}}" height="150" width="175" class="text-center">
+            <p class="text-center">{{person.username}}</p>
+            <p class="text-center">{{person.birthday | ageFilter}}, {{person.city}}, {{person.state}}</p>
+            <p class="text-center">{{person.compatability}}% Match</p>
+            <div class="row">
+              <a uib-tooltip="View Profile" class="col-xs-4 col-xs-offset-1 btn btn-info" href="#!/users/{{person.id}}"><span class="glyphicon glyphicon-eye-open"></span></a>
+              <button uib-tooltip="Spark Request" class="col-xs-4 col-xs-offset-2 btn btn-danger match-button" ng-click="match(person.id)" type="button" name="button"><span class="glyphicon glyphicon-heart"></span></button>
+            </div>
+          </div>
+        </uib-tab>
+      </uib-tabset>
     </div>
   </div>
+
+  <style media="screen">
+    .discover_person {
+      border:6px solid #CFCFEA;
+      border-radius: 5px;
+      padding:2px;
+      margin:8px;
+      display:inline-block;
+      vertical-align:top
+    }
+
+    #filter{
+      position:fixed;
+      margin: 0 auto;
+      right: -80;
+      top:30;
+    }
+
+    .match-button-group{
+      width: 120px;
+      margin-left: 43px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    </style>
+
+    <script type="text/javascript">
+      $(document).on("click", ".match-button", function(){
+        $(this).parent().parent().fadeOut()
+      })
+
+    </script>

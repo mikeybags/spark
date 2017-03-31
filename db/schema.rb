@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330143417) do
+ActiveRecord::Schema.define(version: 20170330221831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,16 @@ ActiveRecord::Schema.define(version: 20170330143417) do
   create_table "pictures", force: :cascade do |t|
     t.string   "image_path"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "image_path_file_name"
+    t.string   "image_path_content_type"
+    t.integer  "image_path_file_size"
+    t.datetime "image_path_updated_at"
     t.index ["user_id"], name: "index_pictures_on_user_id", using: :btree
   end
 
@@ -113,19 +121,15 @@ ActiveRecord::Schema.define(version: 20170330143417) do
     t.text     "bio"
     t.string   "profile_picture"
     t.string   "zipcode"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "personality"
     t.integer  "admin_level"
     t.string   "gender"
-    t.string   "profile_picture_file_name"
-    t.string   "profile_picture_content_type"
-    t.integer  "profile_picture_file_size"
-    t.datetime "profile_picture_updated_at"
     t.string   "city"
     t.string   "state"
     t.integer  "compatability"
-    t.integer  "profile_viewed",               default: 0
+    t.integer  "profile_viewed",      default: 0
   end
 
   add_foreign_key "favorites", "matches"

@@ -3,9 +3,21 @@ require 'fileutils'
 class UsersController < ApplicationController
   def show
     user = User.find(params[:id])
+    images = Picture.where(user_id: params[:id])
     preferences = Preference.find_by_user_id(params[:id])
+    if user.id != cookies.signed[:user_id]
+      user.profile_viewed += 1
+      user.save
+    end
+    match = Match.where("requester_id = ? OR acceptor_id = ?", params[:id], params[:id])
+    match = match.where("requester_id = ? OR acceptor_id = ?", cookies.signed[:user_id], cookies.signed[:user_id])
+    if match.length > 0
+      match = match[0]
+    else
+      match = false
+    end
     if user && preferences
-      render json: {user: user, preferences: preferences}
+      render json: {user: user, preferences: preferences, match: match, images: images}
     else
       render json: {errors: user.errors.full_messages}
     end
@@ -239,8 +251,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def moreImages
+    image = Picture.create(user: User.find(params[:id]))
+    image.update(image_params)
+    render json: {image: image}
+  end
+
   private
     def user_params
       params.require(:user).permit(:profile_picture)
+    end
+    def image_params
+      params.require(:user).permit(:image_path)
     end
 end

@@ -3,7 +3,7 @@
 <div ng-if="view == 0">
   <h1>User Registration</h1>
   <h3>Create Account</h3>
-  <h5>Page {{view + 1}} of 3</h5>
+  <h5>Page {{view + 1}} of 4</h5>
   <form class="form" ng-submit="createUser()">
     <label for="username">Profile Name: </label>
     <input type="text" class="form-control" name="username" ng-model="user.username">
@@ -24,7 +24,7 @@
 <div ng-if="view == 1">
   <h1>User Registration</h1>
   <h3>Set your profile</h3>
-  <h5>Page {{view + 1}} of 3</h5>
+  <h5>Page {{view + 1}} of 4</h5>
   <form ng-submit="updateProfile()">
     <label for="gender">Gender</label>
     <select ng-model="user.gender">
@@ -168,10 +168,173 @@
 <div ng-if="view == 2">
   <h1>User Registration</h1>
   <h3>Set main profile picture</h3>
-  <h5>Page {{view + 1}} of 3</h5>
+  <h5>Page {{view + 1}} of 4</h5>
   <input id="file-input" type="file" ngf-select="upload($file)" ng-model="image" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100">
-  <img ng-src="{{user.profile_picture}}" charset="utf-8">
-  <a ng-href="#!/questionnaire" class="btn btn-success">Proceed to Personality Test</a>
+  <img id="profile_picture" ng-src="{{user.profile_picture}}" charset="utf-8">
+</div>
+
+<div ng-if="view == 3">
+  <h1>User Registration</h1>
+  <h3>What are you looking for in a match?</h3>
+  <h5>Page {{view + 1}} of 4</h5>
+  <form ng-submit="setPreferences()">
+    <label for="gender">Gender: </label>
+    <input type="radio" name="gender" value="Male" ng-model="prefs.gender">
+    <label for="gender.male">Male</label>
+    <input type="radio" name="gender" value="Female" ng-model="prefs.gender">
+    <label for="gender.female">Female</label>
+    <br>
+    <label for="minimum_age">Minimum Age: {{ prefs.minimum_age }}</label>
+    <input type="range" ng-model="prefs.minimum_age" min="18" max="99">
+    <label for="minimum_age">Maximum Age: {{ prefs.maximum_age}}</label>
+    <input type="range" ng-model="prefs.maximum_age" min="18" max="99">
+    <label for="body_type">Body Type:</label>
+    <input type="checkbox" ng-model="prefs.body_type.a"> Slender
+    <input type="checkbox" ng-model="prefs.body_type.b"> Athletic and Toned
+    <input type="checkbox" ng-model="prefs.body_type.c"> Heavyset
+    <input type="checkbox" ng-model="prefs.body_type.d"> A Few Extra Pounds
+    <input type="checkbox" ng-model="prefs.body_type.e"> Stocky
+    <br>
+    <label for="relationship_status">Relationship:</label>
+    <input type="checkbox" ng-model="prefs.relationship_status.a"> Never Married
+    <input type="checkbox" ng-model="prefs.relationship_status.b"> Currently Separated
+    <input type="checkbox" ng-model="prefs.relationship_status.c"> Divorced
+    <input type="checkbox" ng-model="prefs.relationship_status.d"> Widow/Widower
+    <br>
+    <label for="have_children">Has Children?</label>
+    <select ng-model="prefs.has_children">
+      <option value="No">No</option>
+      <option value="Yes">Yes</option>
+    </select>
+    <br>
+    <label for="smoke">Smoke? </label>
+    <input type="checkbox" ng-model="prefs.smokes.a"> No Way
+    <input type="checkbox" ng-model="prefs.smokes.b"> Occasionally
+    <input type="checkbox" ng-model="prefs.smokes.c"> Daily
+    <input type="checkbox" ng-model="prefs.smokes.d"> Cigar Aficionado
+    <input type="checkbox" ng-model="prefs.smokes.e"> Yes, but trying to quit
+    <br>
+    <label for="drink">Drink?</label>
+    <input type="checkbox" ng-model="prefs.drinks.a"> Never
+    <input type="checkbox" ng-model="prefs.drinks.b"> Social Drinker
+    <input type="checkbox" ng-model="prefs.drinks.c"> Regularly
+    <input type="checkbox" ng-model="prefs.drinks.d"> Moderately
+    <br>
+    <label for="ethnicity">Ethnicity:</label>
+    <input type="checkbox" ng-model="prefs.ethnicity.a"> Asian
+    <input type="checkbox" ng-model="prefs.ethnicity.b"> Black / African Descent
+    <input type="checkbox" ng-model="prefs.ethnicity.c"> Latino
+    <input type="checkbox" ng-model="prefs.ethnicity.d"> White / Caucasian
+    <input type="checkbox" ng-model="prefs.ethnicity.e"> Other
+    <br>
+    <label for="faith">Faith: </label>
+    <input type="checkbox" ng-model="prefs.religion.a"> Atheist
+    <input type="checkbox" ng-model="prefs.religion.b"> Christian
+    <input type="checkbox" ng-model="prefs.religion.c"> Jewish
+    <input type="checkbox" ng-model="prefs.religion.d"> Muslim
+    <input type="checkbox" ng-model="prefs.religion.e"> Other
+    <br>
+    <label for="education_level">Education Level:</label>
+    <input type="checkbox" ng-model="prefs.education.a"> High school
+    <input type="checkbox" ng-model="prefs.education.b"> Some college
+    <input type="checkbox" ng-model="prefs.education.c"> Associates degree
+    <input type="checkbox" ng-model="prefs.education.d"> Bachelors degree
+    <input type="checkbox" ng-model="prefs.education.e"> Graduate degree
+    <input type="checkbox" ng-model="prefs.education.f"> PhD / Post Doctoral
+    <br>
+    <label for="height">Minimum Height: </label>
+    <select ng-model="prefs.min_feet">
+      <option value="-">-</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+    <span class="height">Feet</span>
+    <select ng-model="prefs.min_inches">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select>
+    <span class="height">Inches</span>
+    <br>
+    <label for="height">Maximum Height: </label>
+    <select ng-model="prefs.max_feet">
+      <option value="-">-</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+    <span class="height">Feet</span>
+    <select ng-model="prefs.max_inches">
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select>
+    <span class="height">Inches</span>
+    <br>
+    <label for="salary">Salary: </label>
+    <input type="checkbox" ng-model="prefs.salary.a"> Less than $25,000
+    <input type="checkbox" ng-model="prefs.salary.b"> $25,001 to $35,000
+    <input type="checkbox" ng-model="prefs.salary.c"> $35,001 to $50,000
+    <input type="checkbox" ng-model="prefs.salary.d"> $50,001 to $75,000
+    <input type="checkbox" ng-model="prefs.salary.e"> $75,001 to $100,000
+    <input type="checkbox" ng-model="prefs.salary.f"> $100,001 to $150,000
+    <input type="checkbox" ng-model="prefs.salary.g"> $150,001+
+    <br>
+    <label for="dealbreaker">Dealbreaker: </label>
+    <select ng-model="prefs.dealbreaker">
+      <option value="age">Age</option>
+      <option value="body_type">Body Type</option>
+      <option value="relationship_status">Relationship Status</option>
+      <option value="has_children">Has Children</option>
+      <option value="smokes">Smokes</option>
+      <option value="drinks">Drinks</option>
+      <option value="ethnicity">Ethnicity</option>
+      <option value="religion">Religion</option>
+      <option value="education">Education</option>
+      <option value="height">Height</option>
+      <option value="salary">Salary</option>
+    </select>
+    <br>
+    <label for="most_important">Most Important</label>
+    <select ng-model="prefs.most_important">
+      <option value="age">Age</option>
+      <option value="body_type">Body Type</option>
+      <option value="relationship_status">Relationship Status</option>
+      <option value="has_children">Has Children</option>
+      <option value="smokes">Smokes</option>
+      <option value="drinks">Drinks</option>
+      <option value="ethnicity">Ethnicity</option>
+      <option value="religion">Religion</option>
+      <option value="education">Education</option>
+      <option value="height">Height</option>
+      <option value="salary">Salary</option>
+    </select>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
 </div>
 <ul ng-repeat="error in errors">
   <li>{{ error }}</li>

@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     puts params[:zipcode].length
     user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday], zipcode: params[:zipcode])
     if user.valid?
+      cookies.signed[:user_id] = user.id
       Preference.create(user:user)
       render json: {user: user}
     else
@@ -225,6 +226,7 @@ class UsersController < ApplicationController
   def login
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user
+      cookies.signed[:user_id] = user.id
       render json: {user: user}
     else
       render json: {errors: 'Combination does not exist'}

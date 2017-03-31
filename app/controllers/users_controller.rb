@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     images = Picture.where(user_id: params[:id])
     preferences = Preference.find_by_user_id(params[:id])
+    interests = user.interests
     if user.id != cookies.signed[:user_id]
       user.profile_viewed += 1
       user.save
@@ -17,14 +18,13 @@ class UsersController < ApplicationController
       match = false
     end
     if user && preferences
-      render json: {user: user, preferences: preferences, match: match, images: images}
+      render json: {user: user, preferences: preferences, match: match, images: images, interests: interests}
     else
       render json: {errors: user.errors.full_messages}
     end
   end
 
   def new
-    puts params[:zipcode].length
     user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], birthday: params[:birthday], zipcode: params[:zipcode])
     if user.valid?
       cookies.signed[:user_id] = user.id

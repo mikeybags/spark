@@ -38,6 +38,7 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
         $scope.images = data.images
         var x = 0
         for(key in $scope.images){
+          $scope.image_check = true
           $scope.images[key].id = x
           $scope.slides.push($scope.images[key])
           x += 1

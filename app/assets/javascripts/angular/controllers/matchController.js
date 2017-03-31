@@ -49,7 +49,10 @@ app.controller('matchController', ['$scope', 'matchFactory', 'userFactory', '$lo
       }
     })
   }
-
+  $scope.sendAMessage = function(id){
+    $cookies.put('message_id', id)
+    $location.url('/messages')
+  }
   $scope.matchPage = function(bool){
     $scope.page = bool;
   }

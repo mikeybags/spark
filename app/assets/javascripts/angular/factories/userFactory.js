@@ -43,8 +43,8 @@ app.factory("userFactory", ['$http', '$cookies', function($http, $cookies){
       callback(data.data)
     })
   }
-  factory.updatePersonality = function(result, callback){
-    $http.post('/users/personality', {"personality": result, "user": $cookies.get("user")}).then(function(){
+  factory.updatePersonality = function(result, id, callback){
+    $http.post('/users/personality', {"personality": result, "user": id}).then(function(){
       callback()
     })
   }

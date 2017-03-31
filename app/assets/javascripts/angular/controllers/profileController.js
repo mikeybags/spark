@@ -16,7 +16,12 @@ app.controller('profileController', ['$scope', '$http', 'userFactory', 'matchFac
         console.log(data.err)
       }
       else{
-        if (data.match){
+        console.log(data.match);
+        if ($routeParams.id == $cookies.get("id")) {
+          $scope.matchable = false
+          $scope.already_matched = false
+        }
+        else if (data.match){
           if (data.match.accepted){
             $scope.already_matched = true
           }

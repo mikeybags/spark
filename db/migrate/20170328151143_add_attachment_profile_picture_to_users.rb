@@ -1,9 +1,11 @@
 class AddAttachmentProfilePictureToUsers < ActiveRecord::Migration
-  def up
-    add_attachment :pictures, :avatar
+  def self.up
+    change_table :users do |t|
+      t.attachment :profile_picture
+    end
   end
 
-  def down
-    remove_attachment :users, :avatar
+  def self.down
+    remove_attachment :users, :profile_picture
   end
 end
